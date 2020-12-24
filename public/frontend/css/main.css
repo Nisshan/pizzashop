@@ -1,0 +1,359 @@
+body {
+    position: relative;
+    padding-top: 110px;
+    font-family: "Roboto", sans-serif;
+    background-color: #ffffff;
+}
+a {
+    text-decoration: none;
+}
+button:focus {
+    outline: none;
+}
+
+.bg-gray-dark {
+    background: #f2f2f2;
+}
+
+.bg-gray {
+    background-color: #e7e3e3;
+}
+
+header .bg-white {
+    background-color: #fffffff6 !important;
+}
+
+header .bg-light {
+    background-color: #f8f9faf6 !important;
+}
+
+.hoverable-nav {
+    transition: all 0.4s ease;
+    border-bottom: 3px solid #ffffff00;
+}
+.hoverable-nav.active {
+    border-bottom: 3px solid #c20e17;
+}
+
+.hoverable-nav:hover {
+    border-bottom: 3px solid #c20e17;
+}
+
+.mt-70 {
+    margin-top: 160px;
+}
+/* Fonts */
+
+.f-family-2 {
+    font-family: "Playfair Display";
+}
+
+.font-1 {
+    font-size: 1em;
+}
+.font-large {
+    font-size: 1.2em;
+}
+.font-xl {
+    font-size: 1.5em;
+}
+.font-medium {
+    font-size: 18px;
+}
+.weight-400 {
+    font-weight: 400;
+}
+
+.dark-red {
+    background-color: #99081f;
+}
+.hover-red {
+    color: #dc3545;
+    transition: all 0.4s;
+}
+.hover-red:hover {
+    background-color: #dc3545;
+    color: #fff !important;
+}
+
+/* ------------- Box Shadow --------------*/
+.elevate-1 {
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+        0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+}
+.elevate-2 {
+    /* box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.05); */
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+        0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.elevate-3 {
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
+        0 3px 3px -2px rgba(0, 0, 0, 0.12), 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.elevate-4 {
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+        0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+.elevate-5 {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+.obj-fit-cover {
+    object-fit: cover;
+}
+.seperator {
+    background-color: #8dc21f;
+    height: 2px;
+    position: relative;
+    width: 70px;
+    display: block;
+}
+.logo-small {
+    height: 60px;
+    transition: height 0.3s;
+}
+.logo-large {
+    height: 90px;
+    transition: height 0.3s;
+}
+.img-small {
+    width: 80px;
+    height: 60px;
+}
+.img-60 {
+    height: 60px;
+    width: 60px;
+}
+.img-170 {
+    height: 170px;
+    width: 170px;
+}
+.circle-30 {
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+}
+.circle-medium {
+    height: 47px;
+    width: 47px;
+    border-radius: 50px;
+}
+
+.h-80 {
+    height: 80px;
+}
+.h-250 {
+    height: 250px;
+}
+.h-400 {
+    height: 400px;
+}
+.h-100v {
+    height: 100vh;
+}
+
+.w-200 {
+    width: 300px;
+}
+
+.checkout {
+    left: -105px;
+    top: 0;
+    bottom: 0;
+    height: 50px;
+    margin: auto;
+    width: 145px;
+}
+.checkout span {
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    display: inline-block;
+    line-height: 1.6em;
+    margin-right: 15px;
+    text-align: center;
+    width: 1.6em;
+}
+
+footer {
+    background-color: #f9f8f8;
+}
+.overflow-x {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.custom-list {
+    list-style: none;
+}
+.custom-list li a {
+    text-decoration: none;
+    color: #16161600;
+    transition: all ease-in-out 0.3s;
+}
+.custom-list li a:hover {
+    padding-left: 7px;
+}
+
+/* Social Media Icons */
+.social-media a {
+    border-radius: 2em;
+    -moz-border-radius: 2em;
+    -webkit-border-radius: 2em;
+    display: inline-block;
+    line-height: 2em;
+    margin-right: 15px;
+    font-size: 20px;
+    text-align: center;
+    width: 2em;
+    background-color: #5050df;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid #5050df;
+    transition: 0.3s all;
+}
+.social-media a:hover {
+    background-color: #fff;
+    color: #5050df;
+    border: 1px solid #5050df;
+}
+
+.affix {
+    float: right;
+    width: 100%;
+    height: auto;
+    position: sticky;
+    top: 100px;
+}
+/* Radio Button */
+/* 
+  .options label.radio span {
+    padding: 5px 15px;
+    background-color: #ffffff;
+    color: #000000;
+    display: inline-block;
+    margin-right: 2vh;
+    border: 1px solid #363636;
+    border-radius: 10px;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+  }
+  
+  .options label.radio input:checked + span {
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 5px 15px;
+    background-color: #ae1919;
+    border: 1px solid #ae1919;
+    margin-right: 2vh;
+    color: #ffffff;
+    display: inline-block;
+  }
+  .options label.radio input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  
+  .options label.radio {
+    cursor: pointer;
+  } */
+
+/* Radio Button */
+
+label input[type="radio"]:checked ~ span {
+    font-weight: bold;
+}
+
+/* Profile Page */
+.change-profile-btn-container {
+    position: absolute;
+    top: 120px;
+    right: 10px;
+}
+
+.file-upload {
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #fff;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #2590eb 50%, #fff 50%);
+    background-size: 100% 200%;
+    transition: all 1s;
+    color: #fff;
+    font-size: 100px;
+}
+.file-upload input[type="file"] {
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link {
+    color: #6a6a6a;
+}
+
+.nav-tabs .nav-link:hover {
+    border: 1px solid #fff;
+    border-bottom: 3px solid #f8f8f8 !important;
+    background-color: #f8f8f8;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    background-color: #f3f3f3;
+    border-bottom: 3px solid #f9826c !important;
+    font-weight: 500;
+    color: #313131;
+}
+.lSPager li {
+    border: 1px solid #fff;
+    height: 100px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+}
+.lslide img {
+    object-fit: cover;
+}
+.lSPager .active {
+    border: 1px solid #eb2525;
+}
+
+.lSSlideOuter .lSPager.lSGallery img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .order-box {
+        position: fixed;
+        width: 100%;
+        background-color: #e7e3e3;
+        bottom: 0;
+        margin: 0 !important;
+        padding: 20px;
+    }
+
+    .lightSlider .h-400 {
+        height: 100%;
+        max-height: 300px;
+    }
+
+    .h-100v {
+        height: auto;
+    }
+}
