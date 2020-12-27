@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\CategoriesOrderController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ProductVariantsController;
@@ -29,7 +30,11 @@ Auth::routes();
 //        , 'verified';
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::group(['middleware' => ['auth']], function () {
+
+    Route::group(['middleware' => ['auth','IsNotUser']], function () {
+
+        Route::get('/dashboard',DashboardController::class)->name('dashboard');
+
         Route::resource('users', UsersController::class);
         Route::resource('categories', CategoriesController::class);
         Route::resource('products', ProductsController::class);

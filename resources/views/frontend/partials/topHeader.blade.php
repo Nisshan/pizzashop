@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between align-items-center py-2 px-3 bg-white border-bottom">
     <div class="col d-none d-md-block">
-        <h6>Login or Sign-up</h6>
+        <h6><a href="/login">Login</a> or <a href="/register">Sign-up</a></h6>
     </div>
     <figure class="m-0 col">
         <a href="/">

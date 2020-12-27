@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -30,15 +31,22 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        $role = auth()->user()->role;
-        switch ($role) {
-            case '1':
-            case '2':
-                return '/home';
-            default:
-                return '/';
-        }
+        $role = auth()->user()->roleName();
 
+        $redirectUrl = [
+            'Admin' => 'admin/dashboard',
+            'Staff' => 'admin/dashboard',
+            'User' => '/login'
+        ];
+
+        return $redirectUrl[$role];
+
+
+    }
+
+    protected function credentials(Request $request)
+    {
+        return ['email' => $request->{$this->username()}, 'password' => $request->password, 'status' => 1];
     }
 
     /**
