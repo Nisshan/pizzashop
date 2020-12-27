@@ -258,12 +258,12 @@ return [
             'submenu' => [
                 [
                     'text' => 'Manage',
-                    'url' => 'categories',
+                    'url' => 'admin/categories',
                     'icon' => 'fas fa-cogs',
                 ],
                 [
                     'text' => 'Create',
-                    'url' => 'categories/create',
+                    'url' => 'admin/categories/create',
                     'icon' => 'fa fa-plus-circle',
                 ],
                 [
@@ -281,13 +281,13 @@ return [
             'submenu' => [
                 [
                     'text' => 'Manage',
-                    'url' => 'products',
+                    'url' => 'admin/products',
                     'icon' => 'fas fa-cogs',
                     'can' => 'manage_menu'
                 ],
                 [
                     'text' => 'Create',
-                    'url' => 'products/create',
+                    'url' => 'admin/products/create',
                     'icon' => 'fa fa-plus-circle',
                     'can' => 'manage_menu'
 
@@ -301,7 +301,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Manage',
-                    'url' => 'orders',
+                    'url' => 'admin/orders',
                     'icon' => 'fas fa-cogs',
                 ],
             ],

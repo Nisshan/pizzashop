@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Admin\UsersController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ Route::post('/register', [RegisterController::class, 'handle']);
 
 Route::post('/login', [LoginController::class, 'handle']);
 
+Route::get('/', [HomeController::class, 'home']);
+Route::get('/{product}',[HomeController::class,'single']);
+
 Route::middleware(['auth:sanctum'])->group(function () {
- Route::resource('users',UsersController::class)->except('create');
+    Route::resource('users', UsersController::class)->except('create');
 });
