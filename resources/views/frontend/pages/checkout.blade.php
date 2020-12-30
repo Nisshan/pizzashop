@@ -159,10 +159,10 @@
                 </div>
                 <div class="form-group row pb-4">
                     <h4 for="staticEmail" class="col-md-4 col-form-label font-large fw-bold">
-                        {{(count($items) != 1)? 'My Orders' : 'My Order' }}
+                        {{($count != 1)? 'My Orders' : 'My Order' }}
                     </h4>
                     <div class="col-md-8">
-                        @if(count($items))
+                        @if($count)
                             @foreach($items as $item)
                                 <div class="border-bottom pb-4 pt-3">
                                     <div class="d-flex justify-content-between mb-3">
@@ -193,7 +193,7 @@
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger p-1 ms-3 px-2">
-                                                <i class="fa fa-trash pe-2"></i>Delete
+                                                <i class="fa fa-trash pe-2"></i>Remove
                                             </button>
                                         </form>
                                     </div>
@@ -205,17 +205,17 @@
                     </div>
                 </div>
             </div>
-            @if(count($items))
+            @if($count)
                 <div class="col-12 col-md-4 pb-3 mt-3 mt-md-0 d-none d-md-block">
                     <div class="affix p-4 elevate-2 bg-gray-dark">
                         <div class="mb-4">
                             <h3 class="f-family-2 text-center fw-normal text-dark">
-                                Order Detail
+                                {{\Str::plural('Order', $count)}} Detail
                             </h3>
                             <span class="seperator text-center mx-auto"></span>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <p class="font-medium mb-2">{{count($items)}} {{ \Str::plural('items', count($items)) }}</p>
+                            <p class="font-medium mb-2">{{$count}} {{ \Str::plural('Item', $count) }}</p>
                             <p class="font-medium mb-2">{{$subtotal}}</p>
                         </div>
                         {{--                        <div class="d-flex justify-content-between border-bottom mb-2">--}}
@@ -238,7 +238,7 @@
         </div>
     </section>
     <div class="col-8 text-center mb-4 order-box">
-        <button class="btn btn-warning mx-auto rounded-pill px-5 py-2 elevate-1" @if(!count($items)) disabled @endif>
+        <button class="btn btn-warning mx-auto rounded-pill px-5 py-2 elevate-1">
             ORDER NOW
         </button>
     </div>

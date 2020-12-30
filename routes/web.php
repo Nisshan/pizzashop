@@ -29,10 +29,9 @@ Route::get('/', Homecontroller::class)->name('home');
 Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
 
 Route::get('/checkout', [OrderController::class, 'index'])->name('checkout');
-Route::post('/increase/cardItem', [CartController::class, 'increaseCartQuantity'])->name('increase.cart.quantity');
-Route::post('/decrease/cardItem', [CartController::class, 'decreaseCartQuantity'])->name('decrease.cart.quantity');
-Route::delete('/delete/cardItem/{id}', [CartController::class, 'destroyCart'])->name('remove.cart.item');
-
+Route::post('/increase/cartItem', [CartController::class, 'increaseCartQuantity'])->name('increase.cart.quantity');
+Route::post('/decrease/cartItem', [CartController::class, 'decreaseCartQuantity'])->name('decrease.cart.quantity');
+Route::delete('/delete/cartItem/{id}', [CartController::class, 'destroyCart'])->name('remove.cart.item');
 
 Auth::routes();
 

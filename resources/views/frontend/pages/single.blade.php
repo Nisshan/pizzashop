@@ -45,18 +45,6 @@
                     <input type="number" hidden value="{{$product->id}}" name="product_id">
                     <hr/>
                     <div class="d-flex align-items-start align-items-md-center flex-column flex-md-row">
-{{--                        <div--}}
-{{--                            class="me-4 rounded-pill d-flex align-items-center bg-white py-2 elevate-1 mb-3 mb-md-0 w-100"--}}
-{{--                            style="padding: 12px 25px">--}}
-{{--                            <button class="border-0 bg-transparent font-medium pe-4 ps-4 py-2 w-100 dec-counter">--}}
-{{--                                ---}}
-{{--                            </button>--}}
-{{--                            <span class="font-medium no-of-item">1</span>--}}
-{{--                            <button class="border-0 bg-transparent font-medium ps-4 pe-4 w-100 inc-counter">--}}
-{{--                                +--}}
-{{--                            </button>--}}
-{{--                        </div>--}}
-
                         <button type="submit"
                                 class="btn btn-danger dark-red rounded-pill font-1 fw-bold border-0 elevate-1 w-100"
                                 style="padding: 12px 55px">
