@@ -27,8 +27,9 @@ class ProductFactory extends Factory
             'slug' => $this->faker->slug,
             'description' => $this->faker->sentence,
             'cover' => $this->faker->imageUrl(),
-            'status' => rand(0,1),
+            'status' =>1,
             'user_id' => User::get()->random()->id,
+            'price' => rand(10,100)
         ];
 
     }

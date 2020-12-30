@@ -8,10 +8,10 @@
         </a>
     </figure>
     <div class="position-relative">
-        <a href="#"
+        <a href="{{route('checkout')}}"
            class="btn btn-outline-dark d-flex align-items-center rounded-pill position-absolute checkout">
             Checkout
-            <span class="bg-dark text-white ms-2">10</span>
+            <span class="bg-dark text-white ms-2">{{\Cart::count() ?: ""}}</span>
         </a>
     </div>
 </div>

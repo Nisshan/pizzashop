@@ -18,14 +18,13 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $products = Product::factory()->count(5)
-            ->hasAttached(Category::factory()->count(2))
-            ->has(ProductVariant::factory()->count(2), 'variants')
+            ->hasAttached(Category::factory()->count(1))
             ->create();
 
 
         foreach ($products as $product) {
             foreach (Order::all() as $order)
-                $product->orders()->attach($order, ['product_name' => $product->name, 'variant' => $product->variants->first()->variant, 'price' => $product->variants->first()->price, 'quantity' => rand(1, 3)]);
+                $product->orders()->attach($order, ['quantity' => rand(1, 3)]);
         }
     }
 }

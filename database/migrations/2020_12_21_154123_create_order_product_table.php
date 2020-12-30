@@ -17,9 +17,6 @@ class CreateOrderProductTable extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->string('product_name');
-            $table->string('variant');
-            $table->string('price');
             $table->unsignedBigInteger('quantity');
         });
     }

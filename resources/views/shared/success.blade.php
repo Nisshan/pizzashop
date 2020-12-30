@@ -12,7 +12,7 @@
     </div>
 @endif
 
-@if (session()->has('danger'))
+@if(session()->has('danger'))
     <div class="alert alert-danger">
         @if(is_array(session('danger')))
             <ul>

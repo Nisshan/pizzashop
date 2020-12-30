@@ -39,29 +39,21 @@ class ProductsController extends Controller
             'categories' => ['required'],
             'categories.*' => ['required', 'exists:categories,id'],
             'images. *' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'variants.*' => ['required', 'string'],
-            'price.*' => ['required', 'regex:/^\d*(\.\d{2})?$/']
+            'price' => ['required', 'regex:/^\d*(\.\d{2})?$/']
         ], $this->validationMessage());
 
 
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
-            'cover' => $this->uploadCoverImage($request->cover)
+            'cover' => $this->uploadCoverImage($request->cover),
+            'price' => $request->price
         ]);
 
         $this->uploadImages($product, $request->images);
 
         $product->categories()->attach($request->categories);
 
-        foreach ($request->price as $key => $price) {
-            $variants[] = new ProductVariant([
-                'price' => $price,
-                'variant' => $request->variant[$key]
-            ]);
-        }
-
-        $product->variants()->saveMany($variants);
 
         return redirect()->route('products.index')->with('success', 'Product created Success');
 
@@ -71,7 +63,7 @@ class ProductsController extends Controller
     {
         return view('admin.products.view', [
             'title' => 'View' . $product->name,
-            'product' => $product->load('categories', 'variants', 'images')
+            'product' => $product->load('categories', 'images')
         ]);
     }
 
@@ -79,7 +71,7 @@ class ProductsController extends Controller
     {
         return view('admin.products.edit', [
             'title' => 'Edit ' . $product->name,
-            'product' => $product->load('images', 'variants'),
+            'product' => $product->load('images'),
             'categories' => Category::where('status', 1)->get()
         ]);
     }
@@ -93,38 +85,20 @@ class ProductsController extends Controller
             'categories' => ['required'],
             'categories.*' => ['required', 'exists:categories,id'],
             'images. *' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'variants.*' => ['required', 'string'],
-            'price.*' => ['required', 'regex:/^\d*(\.\d{2})?$/']
+            'price' => ['required', 'regex:/^\d*(\.\d{2})?$/']
         ], $this->validationMessage());
 
         $product->update([
             'name' => $request->name,
             'description' => $request->description,
-            'cover' => $this->uploadCoverImage($request->cover, $product)
+            'cover' => $this->uploadCoverImage($request->cover, $product),
+            'price' => $request->price
         ]);
 
         $this->uploadImages($product, $request->images);
 
         $product->categories()->sync($request->categories);
 
-        foreach ($request->price as $key => $price) {
-            $variant = $request->variant;
-            if (isset($request->variant_id[$key])) {
-                ProductVariant::where('id', $request->variant_id[$key])->update([
-                    'price' => $price,
-                    'variant' => $variant[$key]
-                ]);
-            } else {
-                $variants[] = new ProductVariant([
-                    'price' => $price,
-                    'variant' => $variant[$key]
-                ]);
-            }
-        }
-
-        if (isset($variants)) {
-            $product->variants()->saveMany($variants);
-        }
 
         return redirect()->route('products.index')->with('success', 'Product Updated Success');
 

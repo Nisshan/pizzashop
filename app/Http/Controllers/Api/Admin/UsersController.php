@@ -23,24 +23,17 @@ class UsersController extends Controller
     {
         $request->validate([
             'name' => ['required', 'min:5', 'max:255'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['nullable'],
-            'status' => ['nullable', 'boolean']
+            'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
 
         $user->name = $request->name;
-        $user->role = $request->role;
         if (isset($request->password)) {
             $user->password = $request->password;
-        }
-        if (auth()->user()->isAdmin()) {
-            $user->status = $request->status;
         }
         $user->save();
 
         return response()->json(['msg' => 'User Updated Success']);
     }
-
 
     public function delete(User $user)
     {

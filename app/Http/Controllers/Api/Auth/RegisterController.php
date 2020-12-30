@@ -12,10 +12,10 @@ class RegisterController extends Controller
     public function handle(Request $request)
     {
         $request->validate([
-            'email' => ['required','email','unique:users'],
+            'email' => ['required', 'email', 'unique:users'],
             'password' => ['required'],
             'device_name' => ['required'],
-            'name' => ['required','min:3']
+            'name' => ['required', 'min:3']
         ]);
 
         $user = User::create([
@@ -24,7 +24,11 @@ class RegisterController extends Controller
             'email' => $request->email
         ]);
 
-        return $user->createToken($request->device_name)->plainTextToken;
+        return [
+            'token' => $user->createToken($request->device_name)->plainTextToken,
+            'role' => $user->role,
+            'status' => 200
+        ];
 
     }
 }

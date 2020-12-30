@@ -10,4 +10,5 @@ class ProductVariant extends Model
     use HasFactory;
 
     protected $guarded = [];
+
 }

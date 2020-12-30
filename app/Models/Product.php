@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Product extends Model
+class Product extends Model implements Buyable
 {
     use HasFactory;
 
@@ -18,6 +19,7 @@ class Product extends Model
         'updated_at' => 'date:Y-M-d'
     ];
 
+
     protected static function booted()
     {
         Product::creating(function ($model) {
@@ -26,6 +28,23 @@ class Product extends Model
             }
         });
     }
+
+    public function getBuyableIdentifier($options = null)
+    {
+        return $this->id;
+    }
+
+    public function getBuyableDescription($options = null)
+    {
+        return $this->name;
+    }
+
+    public function getBuyablePrice($options = null)
+    {
+
+        return $this->price;
+    }
+
 
     public function setNameAttribute($name)
     {
@@ -46,7 +65,7 @@ class Product extends Model
 
     public function orders()
     {
-        return $this->belongsToMany(Order::class)->withPivot('quantity', 'variant','product_name','price');
+        return $this->belongsToMany(Order::class)->withPivot('quantity');
     }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -54,10 +73,6 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function variants()
-    {
-        return $this->hasMany(ProductVariant::class);
-    }
 
 
     private function slug($name)

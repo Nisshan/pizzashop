@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ProductVariantsController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\Homecontroller;
+use App\Http\Controllers\Frontend\OrderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +24,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', \App\Http\Controllers\Frontend\Homecontroller::class)->name('home');
+Route::get('/', Homecontroller::class)->name('home');
+
+Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
+
+Route::get('/checkout', [OrderController::class, 'index'])->name('checkout');
+Route::post('/increase/cardItem', [CartController::class, 'increaseCartQuantity'])->name('increase.cart.quantity');
+Route::post('/decrease/cardItem', [CartController::class, 'decreaseCartQuantity'])->name('decrease.cart.quantity');
+Route::delete('/delete/cardItem/{id}', [CartController::class, 'destroyCart'])->name('remove.cart.item');
 
 
 Auth::routes();
@@ -31,9 +41,9 @@ Auth::routes();
 
 Route::group(['prefix' => 'admin'], function () {
 
-    Route::group(['middleware' => ['auth','IsNotUser']], function () {
+    Route::group(['middleware' => ['auth', 'IsNotUser']], function () {
 
-        Route::get('/dashboard',DashboardController::class)->name('dashboard');
+        Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
         Route::resource('users', UsersController::class);
         Route::resource('categories', CategoriesController::class);

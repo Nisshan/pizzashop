@@ -54,20 +54,11 @@
                             <td>Status</td>
                             <td>{{$product->status == 1 ? 'Enabled' : 'Disabled'}}</td>
                         </tr>
-                        @if($product->variants->count())
-                            <td>Variants</td>
-                            @foreach($product->variants as $variant)
-                                <tr>
-                                    <td>
-                                        <span>{{'Name :'}}{{$variant->variant}}</span>
-                                    </td>
-                                    <td>
-                                        <span>{{'Price :'}}{{$variant->price}}</span>
-                                    </td>
 
-                                </tr>
-                            @endforeach
-                        @endif
+                        <tr>
+                            <td>Price</td>
+                            <td>{{$product->price}}</td>
+                        </tr>
 
                         <tr>
                             <td>Category</td>

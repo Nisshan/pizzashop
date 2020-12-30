@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('slug')->unique()->index();
             $table->text('description');
+            $table->unsignedBigInteger('price');
             $table->string('cover')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
