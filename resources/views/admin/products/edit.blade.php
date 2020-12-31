@@ -64,14 +64,58 @@
 
                 <div class="form-group">
                     <label for="price">Price: <span class="required-form">*</span></label>
-                    <input type="text" name="price" id="price" required
-                           class="form-control  @error('price') is-invalid @enderror"
+                    <input type="number" name="price" id="price" min="1" required
+                           class="form-control @error('price') is-invalid @enderror"
                            placeholder="Product Price" value="{{$product->price}}">
 
                     @error('price')
                     <span style="color: red">{{ $message }}</span>
                     @enderror
                 </div>
+
+                <div class="form-group">
+                    <div class="mb-3">
+                        <b>Has Offer: <span class="required-form">*</span></b>
+                    </div>
+                    <label>
+                        <input type="radio" name="has_offer"
+                               value="1" @if($product->has_offer == true) checked @endif
+                        > &nbsp; Yes
+                    </label> &nbsp; &nbsp; &nbsp;
+                    <label>
+                        <input type="radio" name="has_offer" value="0" @if($product->has_offer == false) checked @endif
+                        > &nbsp; No
+                    </label> &nbsp;
+                </div>
+
+                <div class="form-group offer_type" id="offer_type" style="display: none">
+                    <div class="mb-3">
+                        <b>Offer type: <span class="required-form">*</span></b>
+                    </div>
+                    <label>
+                        <input type="radio" name="offer_type"
+                               value="1" class='offer_value' @if($product->offer_type == true) checked @endif
+                        > &nbsp; Percentage
+                    </label> &nbsp; &nbsp; &nbsp;
+                    <label>
+                        <input type="radio" name="offer_type" class='offer_value' value="0"
+                               @if($product->offer_type == false) checked @endif
+                        > &nbsp; Amount
+                    </label> &nbsp;
+                </div>
+
+                <div class="form-group percentage" style="display:none;" id="percentage">
+                    <label for="percent_off">Percentage Off: <span class="required-form">*</span></label>
+                    <input type="number" min="1" max="100" class="form-control" name="percent_off"
+                           id="percentage_reset" value="{{$product->percent_off}}">
+                </div>
+
+                <div class="form-group amount" style="display:none;" id="amount">
+                    <label for="amount">Amount Off: <span class="required-form">*</span></label>
+                    <input type="number" min="1" class="form-control" name="amount_off" id="amount_reset"
+                           value="{{$product->amount_off}}">
+                </div>
+
 
                 <div class="mb-2">
                     <label for="cover-image">Cover Image :</label>
@@ -92,15 +136,15 @@
                     </div>
                     <br>
                     @if($product->images->count())
-                    <div class="image-preview">
-                        @foreach($product->images as $image)
-                            <img id="images"
-                                 src="{{ $image->path ? $image->path() : "/images/admin/preview.jpg"}}"
-                                 height="100px" width="100px">
-                        @endforeach
-                        <br>
-                        <span style="color: red">If you upload new files old files will be deleted</span><br>
-                    </div>
+                        <div class="image-preview" >
+                            @foreach($product->images as $image)
+                                <img id="images"
+                                     src="{{ $image->path ? $image->path() : "/images/admin/preview.jpg"}}"
+                                     height="100px" width="100px">
+                            @endforeach
+                            <br>
+                            <span style="color: red">If you upload new files old files will be deleted</span><br>
+                        </div>
                     @endif
 
                     @error('images.*')
@@ -114,7 +158,7 @@
                     </div>
                     <label>
                         <input type="radio" name="status"
-                               value="1" checked
+                               value="1"
                                @if($product->status == true) checked @endif
                         > &nbsp; Active
                     </label> &nbsp; &nbsp; &nbsp;
@@ -167,6 +211,60 @@
 
             document.querySelector('#file-input').addEventListener("change", previewImages);
         });
+
+        $(document).on("wheel", "input[type=number]", function (e) {
+            $(this).blur();
+        });
+
+        $(document).ready(function () {
+            $("input[name$='has_offer']").click(function () {
+                if ($(this).val() === '1') {
+                    $('#offer_type').show();
+                    $('.offer_value').attr('required', true);
+                } else {
+                    $('#offer_type').hide();
+                    $('.offer_value').attr('required', false);
+                    $('.offer_type').find("input:radio:checked").prop('checked', false);
+                    $('#percentage').hide();
+                    $('#amount').hide();
+                }
+            });
+        })
+
+
+        var offer_type = "{{$product->offer_type ? '1' : '0' }}"
+        var has_offer = "{{$product->has_offer ? '1' : '0'}}"
+
+        if (has_offer === '1') {
+            $('#offer_type').show();
+        } else {
+            $('#offer_type').hide();
+        }
+
+
+        if ($('input[name="offer_type"]:checked').val() === '1') {
+            $('#percentage').show();
+        } else {
+            $('#amount').show();
+        }
+
+        $(document).ready(function () {
+            $("input[name$='offer_type']").click(function () {
+                if ($(this).val() === '1') {
+                    $('#percentage').show();
+                    $('#percentage_reset').attr('required', true)
+                    $('#amount_reset').attr('required', false)
+                    $('#amount').hide();
+                    $('#amount_reset').val("");
+                } else {
+                    $('#percentage').hide();
+                    $('#amount').show();
+                    $('#percentage_reset').val("")
+                    $('#percentage_reset').attr('required', false)
+                    $('#amount_reset').attr('required', true)
+                }
+            });
+        })
     </script>
 @endpush
 

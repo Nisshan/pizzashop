@@ -17,7 +17,7 @@ class Product extends Model
 
     protected $casts = [
         'created_at' => 'date:Y-M-d',
-        'updated_at' => 'date:Y-M-d'
+        'updated_at' => 'date:Y-M-d',
     ];
 
 

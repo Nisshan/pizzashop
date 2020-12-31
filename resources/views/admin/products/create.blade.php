@@ -64,13 +64,54 @@
 
                 <div class="form-group">
                     <label for="price">Price: <span class="required-form">*</span></label>
-                    <input type="text" name="price" id="price" required
+                    <input type="number" name="price" id="price" min="1" required
                            class="form-control  @error('price') is-invalid @enderror"
                            placeholder="Product Price" value="{{old('price')}}">
 
                     @error('price')
                     <span style="color: red">{{ $message }}</span>
                     @enderror
+                </div>
+
+                <div class="form-group">
+                    <div class="mb-3">
+                        <b>Has Offer: <span class="required-form">*</span></b>
+                    </div>
+                    <label>
+                        <input type="radio" name="has_offer"
+                               value="1"
+                        > &nbsp; Yes
+                    </label> &nbsp; &nbsp; &nbsp;
+                    <label>
+                        <input type="radio" name="has_offer" value="0" checked
+                        > &nbsp; No
+                    </label> &nbsp;
+                </div>
+
+                <div class="form-group offer_type" id="offer_type" style="display: none">
+                    <div class="mb-3">
+                        <b>Offer type: <span class="required-form">*</span></b>
+                    </div>
+                    <label>
+                        <input type="radio" name="offer_type"
+                               value="1" class='offer_value'
+                        > &nbsp; Percentage
+                    </label> &nbsp; &nbsp; &nbsp;
+                    <label>
+                        <input type="radio" name="offer_type" class='offer_value' value="0"
+                        > &nbsp; Amount
+                    </label> &nbsp;
+                </div>
+
+                <div class="form-group percentage" style="display:none;" id="percentage">
+                    <label for="percent_off">Percentage Off: <span class="required-form">*</span></label>
+                    <input type="number" min="1" max="100" class="form-control" name="percent_off"
+                           id="percentage_reset">
+                </div>
+
+                <div class="form-group amount" style="display:none;" id="amount">
+                    <label for="amount">Amount Off: <span class="required-form">*</span></label>
+                    <input type="number" min="1" class="form-control" name="amount_off" id="amount_reset">
                 </div>
 
                 <div class="mb-2">
@@ -139,6 +180,47 @@
 
             document.querySelector('#file-input').addEventListener("change", previewImages);
         });
+
+        $(document).on("wheel", "input[type=number]", function (e) {
+            $(this).blur();
+        });
+
+        $(document).ready(function () {
+            $("input[name$='has_offer']").click(function () {
+                if ($(this).val() === '1') {
+                    $('#offer_type').show();
+                    $('.offer_value').attr('required', true);
+                } else {
+                    $('#offer_type').hide();
+                    $('.offer_value').attr('required', false);
+                    $('.offer_type').find("input:radio:checked").prop('checked', false);
+                    $('#percentage').hide();
+                    $('#amount').hide();
+                    $('#amount_reset').val("");
+                    $('#percentage_reset').val("")
+                }
+
+            });
+        })
+
+        $(document).ready(function () {
+            $("input[name$='offer_type']").click(function () {
+                if ($(this).val() === '1') {
+                    $('#percentage').show();
+                    $('#percentage_reset').attr('required', true)
+                    $('#amount_reset').attr('required', false)
+                    $('#amount').hide();
+                    $('#amount_reset').val("");
+                } else {
+                    $('#percentage').hide();
+                    $('#amount').show();
+                    $('#percentage_reset').val("")
+                    $('#percentage_reset').attr('required', false)
+                    $('#amount_reset').attr('required', true)
+                }
+            });
+        })
+
 
     </script>
 @endpush

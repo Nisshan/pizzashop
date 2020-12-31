@@ -30,6 +30,8 @@ class ProductsDatatable extends DataTable
                 return $view;
             })->editColumn('status', function ($query) {
                 return $query->status == true ? 'Active' : 'Inactive';
+            })->editColumn('has_offer',function ($query){
+                return $query->has_offer =1 ? 'Yes' : 'No';
             });
     }
 
@@ -58,6 +60,8 @@ class ProductsDatatable extends DataTable
     {
         return [
             'name',
+            'price',
+            'has_offer',
             'status',
             'created_at',
             Column::computed('action'),

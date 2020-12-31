@@ -5,11 +5,11 @@ use App\Http\Controllers\Admin\CategoriesOrderController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ProductsController;
-use App\Http\Controllers\Admin\ProductVariantsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\Homecontroller;
 use App\Http\Controllers\Frontend\OrderController;
+use App\Http\Controllers\Frontend\SinglePageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -50,12 +50,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('orders', OrdersController::class)->except('create');
         Route::post('/orders/changeStatus', [OrdersController::class, 'changeStatus']);
 
-        Route::delete('/products/variant/delete', ProductVariantsController::class)->name('product.variant.destroy');
         Route::get('menu', [CategoriesOrderController::class, 'index'])->name('menu');
         Route::post('/update/menu', [CategoriesOrderController::class, 'updateOrder'])->name('update.position');
     });
 });
 
-Route::get('/{category:slug}/{product:slug}', \App\Http\Controllers\Frontend\SinglePageController::class)->name('single');
+Route::get('/{category:slug}/{product:slug}', SinglePageController::class)->name('single');
 
 

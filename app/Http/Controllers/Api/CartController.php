@@ -12,7 +12,7 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
 
-//        cart()->setUser(auth()->id());
+        cart()->setUser(auth()->id());
         Product::addToCart($request->product_id);
         return response()->json([
             'items' => cart()->toArray(),

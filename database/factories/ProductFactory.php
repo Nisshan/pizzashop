@@ -29,7 +29,11 @@ class ProductFactory extends Factory
             'cover' => $this->faker->imageUrl(),
             'status' =>1,
             'user_id' => User::get()->random()->id,
-            'price' => rand(10,100)
+            'price' => rand(10,100),
+            'has_offer' => 1,
+            'offer_type' => rand(0,1),
+            'amount_off' => rand(1,8),
+            'percent_off' => rand(1,50)
         ];
 
     }

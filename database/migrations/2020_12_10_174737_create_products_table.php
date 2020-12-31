@@ -22,9 +22,14 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('price');
             $table->string('cover')->nullable();
             $table->boolean('status')->default(1);
+            $table->boolean('has_offer')->default(0); //0 is false and 1 is true
+            $table->boolean('offer_type')->default(0); //0 for amount and for percentage
+            $table->integer('percent_off')->nullable();
+            $table->integer('amount_off')->nullable();
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *

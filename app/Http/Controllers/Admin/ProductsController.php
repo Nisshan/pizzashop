@@ -6,7 +6,6 @@ use App\DataTables\ProductsDatatable;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
@@ -39,21 +38,27 @@ class ProductsController extends Controller
             'categories' => ['required'],
             'categories.*' => ['required', 'exists:categories,id'],
             'images. *' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'price' => ['required', 'regex:/^\d*(\.\d{2})?$/']
+            'price' => ['required', 'regex:/^\d*(\.\d{2})?$/'],
+            'amount_off' => ['nullable', 'integer', 'min:1'],
+            'percent_off' => ['nullable', 'integer', 'min:1', 'max:100'],
+            'offer_type' => ['nullable', 'boolean'],
+            'has_offer' => ['required', 'boolean']
         ], $this->validationMessage());
-
 
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
             'cover' => $this->uploadCoverImage($request->cover),
-            'price' => $request->price
+            'price' => $request->price,
+            'amount_off' => $request->amount_off,
+            'percent_off' => $request->percent_off,
+            'offer_type' => $request->offer_type,
+            'has_offer' => $request->has_offer
         ]);
 
         $this->uploadImages($product, $request->images);
 
         $product->categories()->attach($request->categories);
-
 
         return redirect()->route('products.index')->with('success', 'Product created Success');
 
@@ -62,7 +67,7 @@ class ProductsController extends Controller
     public function show(Product $product)
     {
         return view('admin.products.view', [
-            'title' => 'View' . $product->name,
+            'title' => 'View ' . $product->name,
             'product' => $product->load('categories', 'images')
         ]);
     }
@@ -85,20 +90,28 @@ class ProductsController extends Controller
             'categories' => ['required'],
             'categories.*' => ['required', 'exists:categories,id'],
             'images. *' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'price' => ['required', 'regex:/^\d*(\.\d{2})?$/']
+            'price' => ['required', 'regex:/^\d*(\.\d{2})?$/'],
+            'amount_off' => ['nullable', 'integer', 'min:1'],
+            'percent_off' => ['nullable', 'integer', 'min:1', 'max:100'],
+            'offer_type' => ['nullable', 'boolean'],
+            'has_offer' => ['required', 'boolean']
         ], $this->validationMessage());
 
         $product->update([
             'name' => $request->name,
             'description' => $request->description,
             'cover' => $this->uploadCoverImage($request->cover, $product),
-            'price' => $request->price
+            'price' => $request->price,
+            'amount_off' => $request->amount_off,
+            'percent_off' => $request->percent_off,
+            'offer_type' => isset($request->offer_type) ? $request->offer_type : 0,
+            'has_offer' => $request->has_offer,
+            'status' => $request->status
         ]);
 
         $this->uploadImages($product, $request->images);
 
         $product->categories()->sync($request->categories);
-
 
         return redirect()->route('products.index')->with('success', 'Product Updated Success');
 

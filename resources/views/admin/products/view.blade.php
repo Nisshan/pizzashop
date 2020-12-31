@@ -61,6 +61,31 @@
                         </tr>
 
                         <tr>
+                            <td>Has Offer</td>
+                            <td>{{$product->has_offer == 1 ? 'Yes' : 'No'}}</td>
+                        </tr>
+
+                        @if($product->has_offer == 1)
+                            <tr>
+                                <td>Offer Type</td>
+                                <td>{{$product->offer_type == 1 ? 'Percentage' : 'Amount'}}</td>
+                            </tr>
+
+                            @if($product->offer_type == 1)
+                                <tr>
+                                    <td>Percent Off</td>
+                                    <td>{{$product->percent_off}}{{'%'}}</td>
+                                </tr>
+                            @else
+                                <tr>
+                                    <td>Amount Off</td>
+                                    <td>{{$product->amount_off}}</td>
+                                </tr>
+                            @endif
+
+                        @endif
+
+                        <tr>
                             <td>Category</td>
                             <td>
                                 @foreach($product->categories as $category)
@@ -69,7 +94,6 @@
                                 @endforeach
                             </td>
                         </tr>
-
                         <tr>
                             <td>Images</td>
                             @if($product->images->count())
