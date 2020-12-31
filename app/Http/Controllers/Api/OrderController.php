@@ -11,11 +11,11 @@ class OrderController extends Controller
     public function index()
     {
         return response()->json([
-            'items' => Cart::content(),
-            'tax' => Cart::tax(),
-            'total' => Cart::total(),
-            'subtotal' => Cart::subtotal(),
-            'count' => Cart::count()
+            'items' => cart()->items(),
+            'tax' => cart()->tax(),
+            'transaction' =>cart()->totals(),
+            'subtotal' => cart()->getSubtotal(),
+            'count' => count(cart()->items())
         ]);
     }
 }

@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Gloudemans\Shoppingcart\Contracts\Buyable;
+use Freshbitsweb\LaravelCartManager\Traits\Cartable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Product extends Model implements Buyable
+class Product extends Model
 {
     use HasFactory;
+    use Cartable;
 
     protected $guarded = [];
 
@@ -29,21 +30,9 @@ class Product extends Model implements Buyable
         });
     }
 
-    public function getBuyableIdentifier($options = null)
-    {
-        return $this->id;
-    }
 
-    public function getBuyableDescription($options = null)
-    {
-        return $this->name;
-    }
 
-    public function getBuyablePrice($options = null)
-    {
 
-        return $this->price;
-    }
 
 
     public function setNameAttribute($name)

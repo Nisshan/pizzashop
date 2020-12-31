@@ -163,33 +163,33 @@
                     </h4>
                     <div class="col-md-8">
                         @if($count)
-                            @foreach($items as $item)
+                            @foreach($items as $key => $item)
                                 <div class="border-bottom pb-4 pt-3">
                                     <div class="d-flex justify-content-between mb-3">
-                                        <h5>{{$item->name}}</h5>
-                                        <h6>$ {{ $item->qty * $item->price}}</h6>
+                                        <h5>{{$item['name']}}</h5>
+                                        <h6>$ {{ $item['quantity'] * $item['price']}}</h6>
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <form action="{{route('decrease.cart.quantity')}}" method="post">
                                             @csrf
-                                            <input type="text" value="{{$item->rowId}}" name="row_id" hidden>
+                                            <input type="text" value="{{$key}}" name="index" hidden>
                                             <button type="submit"
-                                                    class="border border-danger circle-30 p-3 d-flex align-items-center justify-content-center me-3 @if($item->qty > 1) hover-red @endif "
-                                                    @if($item->qty < 2) disabled @endif>
+                                                    class="border  circle-30 p-3 d-flex align-items-center justify-content-center me-3 @if($item['quantity'] > 1) border-danger hover-red @endif "
+                                                    @if($item['quantity'] < 2) disabled @endif>
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </form>
-                                        <span class="h5 mb-0">{{$item->qty}}</span>
+                                        <span class="h5 mb-0">{{$item['quantity']}}</span>
                                         <form action="{{route('increase.cart.quantity')}}" method="post">
                                             @csrf
-                                            <input type="text" value="{{$item->rowId}}" name="row_id" hidden>
+                                            <input type="text" value="{{$key}}" name="index" hidden>
                                             <button type="submit"
                                                     class="border border-danger circle-30 p-3 d-flex align-items-center justify-content-center ms-3 hover-red">
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                         </form>
 
-                                        <form action="{{route('remove.cart.item',$item->rowId)}}" method="post">
+                                        <form action="{{route('remove.cart.item',$key)}}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-danger p-1 ms-3 px-2">
@@ -216,7 +216,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="font-medium mb-2">{{$count}} {{ \Str::plural('Item', $count) }}</p>
-                            <p class="font-medium mb-2">{{$subtotal}}</p>
+                            <p class="font-medium mb-2">{{$transaction['Subtotal']}}</p>
                         </div>
                         {{--                        <div class="d-flex justify-content-between border-bottom mb-2">--}}
                         {{--                            <p class="font-medium mb-2">Discount</p>--}}
@@ -224,12 +224,12 @@
                         {{--                        </div>--}}
                         <div class="d-flex justify-content-between">
                             <p class="font-medium mb-2">Tax</p>
-                            <p class="font-medium mb-2">{{$tax}}</p>
+                            <p class="font-medium mb-2">{{$transaction['Tax']}}</p>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between border-bottom">
                             <p class="font-medium mb-2">TOTAL</p>
-                            <p class="font-medium mb-2">{{$total}}</p>
+                            <p class="font-medium mb-2">{{$transaction['Payable']}}</p>
                         </div>
 
                     </div>

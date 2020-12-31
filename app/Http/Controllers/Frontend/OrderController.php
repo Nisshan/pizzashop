@@ -10,15 +10,15 @@ class OrderController extends Controller
 {
     public function index()
     {
-        if (Cart::count() == 0) {
+        if (count(cart()->items()) == 0) {
             return redirect()->route('home')->with('error', 'No Items in Cart, Please Add Items First');
         }
-        return view('frontend.pages.checkout',[
-            'items' => Cart::content(),
-            'tax' => Cart::tax(),
-            'total' => Cart::total(),
-            'subtotal' => Cart::subtotal(),
-            'count' => Cart::count()
+        return view('frontend.pages.checkout', [
+            'items' => cart()->items(),
+            'tax' => cart()->tax(),
+            'transaction' =>cart()->totals(),
+            'subtotal' => cart()->getSubtotal(),
+            'count' => count(cart()->items())
         ]);
     }
 }
