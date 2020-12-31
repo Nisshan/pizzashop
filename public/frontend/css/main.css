@@ -15,6 +15,10 @@ button:focus {
     background: #f2f2f2;
 }
 
+.bg-offer {
+    background-color: #af0909;
+}
+
 .bg-gray {
     background-color: #e7e3e3;
 }
@@ -32,7 +36,7 @@ header .bg-light {
     border-bottom: 3px solid #ffffff00;
 }
 .hoverable-nav.active {
-    border-bottom: 3px solid #c20e17;
+    border-bottom: 3px solid #c20e17 !important;
 }
 
 .hoverable-nav:hover {
@@ -299,9 +303,14 @@ label input[type="radio"]:checked ~ span {
     left: 0;
     opacity: 0;
 }
+.navbar-nav .nav-item .nav-link {
+    white-space: nowrap;
+}
+
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link {
     color: #6a6a6a;
+    border-bottom: 3px solid #ffffff !important;
 }
 
 .nav-tabs .nav-link:hover {
@@ -338,14 +347,76 @@ label input[type="radio"]:checked ~ span {
     margin: auto;
 }
 
+.alert {
+    z-index: 9999;
+}
+
+.ribbon {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    z-index: 1;
+    overflow: hidden;
+    width: 75px;
+    height: 75px;
+    text-align: right;
+}
+.ribbon span {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 20px;
+    transform: rotate(45deg);
+    width: 100px;
+    display: block;
+    background: #79a70a;
+    background: linear-gradient(#ff0000 0%, #eb1b1b 100%);
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+    position: absolute;
+    top: 19px;
+    right: -21px;
+}
+.ribbon span::before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 100%;
+    z-index: -1;
+    border-left: 3px solid #ff0000;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #ff0000;
+}
+.ribbon span::after {
+    content: "";
+    position: absolute;
+    right: 0px;
+    top: 100%;
+    z-index: -1;
+    border-left: 3px solid transparent;
+    border-right: 3px solid #ff0000;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #ff0000;
+}
+
 @media only screen and (max-width: 768px) {
+    footer {
+        padding-bottom: 5rem;
+    }
     .order-box {
         position: fixed;
         width: 100%;
-        background-color: #e7e3e3;
+        background-color: #ffffffee;
         bottom: 0;
         margin: 0 !important;
-        padding: 20px;
+        padding: 10px 20px;
+        z-index: 999;
+        border-top: 1px solid #4f4f4f;
+    }
+    .order-box div button {
+        border-radius: 0px !important;
     }
 
     .lightSlider .h-400 {
@@ -356,4 +427,31 @@ label input[type="radio"]:checked ~ span {
     .h-100v {
         height: auto;
     }
+}
+
+.custom-scrollbar {
+    overflow-x: auto !important;
+}
+
+/* width */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+    height: 0px;
+}
+
+/* Track */
+.custom-scrollbar::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgb(128, 128, 128);
+    border-radius: 15px;
+}
+
+/* Handle on hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #c0c0c0;
 }
