@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CouponController;
 use App\Http\Controllers\Frontend\Homecontroller;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\SinglePageController;
@@ -32,6 +33,8 @@ Route::get('/checkout', [OrderController::class, 'index'])->name('checkout');
 Route::post('/increase/cartItem', [CartController::class, 'increaseCartQuantity'])->name('increase.cart.quantity');
 Route::post('/decrease/cartItem', [CartController::class, 'decreaseCartQuantity'])->name('decrease.cart.quantity');
 Route::delete('/delete/cartItem/{id}', [CartController::class, 'destroyCart'])->name('remove.cart.item');
+Route::post('/coupon/add', [CouponController::class, 'store'])->name('coupon.store');
+Route::post('/coupon/delete',[CouponController::class,'destroy'])->name('coupon.delete');
 
 Auth::routes();
 
@@ -48,6 +51,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('categories', CategoriesController::class);
         Route::resource('products', ProductsController::class);
         Route::resource('orders', OrdersController::class)->except('create');
+        Route::resource('coupons', App\Http\Controllers\Admin\CouponController::class);
         Route::post('/orders/changeStatus', [OrdersController::class, 'changeStatus']);
 
         Route::get('menu', [CategoriesOrderController::class, 'index'])->name('menu');

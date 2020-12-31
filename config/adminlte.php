@@ -306,6 +306,25 @@ return [
                 ],
             ],
         ],
+        [
+            'text' => 'Coupons',
+            'icon' => 'fas fa-tags',
+            'submenu' => [
+                [
+                    'text' => 'Manage',
+                    'url' => 'admin/coupons',
+                    'icon' => 'fas fa-cogs',
+
+                ],
+                [
+                    'text' => 'Create',
+                    'url' => 'admin/coupons/create',
+                    'icon' => 'fa fa-plus-circle',
+                    'can' => 'manage_menu',
+                ],
+            ]
+
+        ],
 
     ],
 

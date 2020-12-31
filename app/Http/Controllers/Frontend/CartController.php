@@ -12,7 +12,7 @@ class CartController extends Controller
     {
         cart()->setUser(auth()->id());
         Product::addToCart($request->product_id);
-        return redirect()->back()->with('Success', 'Item Added To Cart');
+        return redirect()->back()->with('success', 'Item Added To Cart');
     }
 
     public function increaseCartQuantity(Request $request)

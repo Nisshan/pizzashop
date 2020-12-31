@@ -13,12 +13,22 @@ class OrderController extends Controller
         if (count(cart()->items()) == 0) {
             return redirect()->route('home')->with('error', 'No Items in Cart, Please Add Items First');
         }
+        cart()->refreshAllItemsData();
+
+        $discount = session()->get('coupon')['discount'] ?? 0;
+
+
+        $newSubTotal = cart()->getSubtotal() - $discount;
+
         return view('frontend.pages.checkout', [
             'items' => cart()->items(),
             'tax' => cart()->tax(),
-            'transaction' =>cart()->totals(),
+            'transaction' => cart()->totals(),
             'subtotal' => cart()->getSubtotal(),
-            'count' => count(cart()->items())
+            'count' => count(cart()->items()),
+            'discount' => $discount,
+            'newSubTotal' => $newSubTotal,
+            'payable' => $newSubTotal + \cart()->tax()
         ]);
     }
 }

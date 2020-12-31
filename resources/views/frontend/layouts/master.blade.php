@@ -37,6 +37,14 @@
     <script src="{{asset('frontend/navscroller/nav.js')}}"></script>
 
     <script src="{{asset('frontend/js/main.js')}}"></script>
+
+    <script>
+        $(function () {
+            setTimeout(function () {
+                $('.alert').fadeOut('slow');
+            }, 4000)
+        })
+    </script>
 </body>
 
 </html>

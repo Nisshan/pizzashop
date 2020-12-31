@@ -30,15 +30,23 @@ class Product extends Model
         });
     }
 
-
-
-
-
-
     public function setNameAttribute($name)
     {
         $this->attributes['name'] = ucwords($name);
         $this->attributes['slug'] = $this->slug($name);
+    }
+
+    public function getPrice()
+    {
+        if ($this->has_offer == 1) {
+            if ($this->offer_type == 1) {
+                return $this->price * $this->percent_off / 100;
+            }
+            return $this->price - $this->amount_off;
+        }
+        return $this->price;
+
+
     }
 
 
@@ -61,8 +69,6 @@ class Product extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-
 
     private function slug($name)
     {
