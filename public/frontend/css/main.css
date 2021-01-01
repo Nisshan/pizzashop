@@ -351,6 +351,28 @@ label input[type="radio"]:checked ~ span {
     z-index: 9999;
 }
 
+.discount-price {
+    text-decoration: line-through 2px solid;
+    color: #c7c7c7;
+    font-weight: 300;
+}
+
+.title-box {
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+    transition: all 0.5s;
+    width: 100%;
+    padding: 0.5em 0.5em;
+}
+
+.single-item:hover .title-box {
+    position: absolute;
+    opacity: 1;
+    background-color: #ffffffde;
+    width: 100%;
+}
+
 .ribbon {
     position: absolute;
     right: -5px;
