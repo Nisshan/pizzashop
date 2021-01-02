@@ -10,13 +10,22 @@ class OrderController extends Controller
 {
     public function index()
     {
-        if (count(cart()->items()) == 0) {
-            return redirect()->route('home')->with('error', 'No Items in Cart, Please Add Items First');
+        session()->forget('coupon');
+        $coupon = auth()->user()->coupon()->first();
+
+        if (auth()->check() && isset($coupon)) {
+            session()->put('coupon', [
+                'name' => $coupon->name,
+                'discount' => $coupon->discount
+            ]);
         }
+        if (count(cart()->items()) < 1) {
+            return redirect()->route('home')->with('error', 'No Items in Cart, Please Add Before Processing');
+        }
+
         cart()->refreshAllItemsData();
 
         $discount = session()->get('coupon')['discount'] ?? 0;
-
 
         $newSubTotal = cart()->getSubtotal() - $discount;
 
@@ -28,7 +37,13 @@ class OrderController extends Controller
             'count' => count(cart()->items()),
             'discount' => $discount,
             'newSubTotal' => $newSubTotal,
-            'payable' => $newSubTotal + \cart()->tax()
+            'payable' => $newSubTotal + cart()->tax()
         ]);
+    }
+
+
+    public function store(Request $request)
+    {
+        dd($request);
     }
 }

@@ -90,11 +90,12 @@ class Product extends Model
     //this is for the frontend path as it will include a default image to show
     public function getPath()
     {
-        return $this->cover ? url('storage/images/' . $this->cover) : '/images/preview.jpg';
+        return $this->cover ? url('storage/images/' . $this->cover) : '/images/logo.png';
     }
 
     public function getCoverThumb()
     {
         return url('storage/thumb/' . $this->cover);
     }
+
 }

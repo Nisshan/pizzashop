@@ -62,7 +62,7 @@ class UsersController extends Controller
         $request->validate([
             'name' => ['required', 'min:5', 'max:255'],
             'password' => ['nullable', 'min:8'],
-            'status' => ['nullable', 'boolean']
+            'is_active' => ['nullable', 'boolean']
         ]);
 
         $user->name = $request->name;
@@ -70,7 +70,7 @@ class UsersController extends Controller
             $user->password = $request->password;
         }
         if (auth()->user()->isAdmin()) {
-            $user->status = $request->status;
+            $user->status = $request->is_active;
         }
         $user->save();
         return redirect()->route('users.index')->with('success', 'User Updated Success');

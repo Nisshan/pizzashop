@@ -8,7 +8,7 @@
     </div>
     <figure class="m-0 col">
         <a href="/">
-            <img class="img-fluid logo-small" src="{{asset('frontend/images/logo.jpg')}}"/>
+            <img class="img-fluid logo-small" src="{{asset("/images/logo.png")}}"/>
         </a>
     </figure>
 </div>

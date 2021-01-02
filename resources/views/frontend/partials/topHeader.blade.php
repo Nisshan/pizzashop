@@ -11,7 +11,7 @@
 
     <figure class="m-0 col">
         <a href="/">
-            <img class="logo img-fluid logo-large" src="{{asset('frontend/images/logo.jpg')}}" />
+            <img class="logo img-fluid logo-large" src="{{asset("/images/logo.png")}}" />
         </a>
     </figure>
     @if(count( cart()->items()))

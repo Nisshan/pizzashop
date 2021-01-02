@@ -122,7 +122,7 @@
                                id="cover-image"
                                onchange="document.getElementById('cover').src = window.URL.createObjectURL(this.files[0])">
                     </div>
-                    <img id="cover" src="{{"/images/preview.jpg"}}"
+                    <img id="cover" src="{{asset("/images/logo.png")}}"
                          height="100px" width="100px"><br>
 
                     @error('cover')

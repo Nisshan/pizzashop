@@ -63,12 +63,12 @@
                             <label>
                                 <input type="radio" name="is_active"
                                        value="1"
-                                       @if($user->is_active == true) checked @endif
+                                       @if($user->status == true) checked @endif
                                 > &nbsp; Active
                             </label> &nbsp; &nbsp; &nbsp;
                             <label>
                                 <input type="radio" name="is_active" value="0"
-                                       @if($user->is_active == false) checked @endif
+                                       @if($user->status == false) checked @endif
                                 > &nbsp; Inactive
                             </label>
                         </div>

@@ -4,7 +4,7 @@
       <div class="col-12 col-md-3">
         <figure>
           <a href="/">
-            <img class="img-fluid" src="{{asset('frontend/images/logo.jpg')}}" alt="" />
+            <img class="img-fluid" src="{{asset("/images/logo.png")}}" alt="" />
           </a>
         </figure>
       </div>

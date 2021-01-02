@@ -15,10 +15,11 @@ class HomeController extends Controller
     public function home()
     {
 
-        return CategoryResource::collection( Category::with('products')->where('status', 1)->orderBy('position')->get());
+        return CategoryResource::collection(Category::with('products')->where('status', 1)->orderBy('position')->get());
     }
 
-    public function single(Product $product){
+    public function single(Product $product)
+    {
         return new ProductResource($product);
 
     }

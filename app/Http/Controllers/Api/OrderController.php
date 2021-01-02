@@ -8,14 +8,20 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+
     public function index()
     {
+        cart()->setUser(auth()->id());
         return response()->json([
             'items' => cart()->items(),
             'tax' => cart()->tax(),
-            'transaction' =>cart()->totals(),
+            'transaction' => cart()->totals(),
             'subtotal' => cart()->getSubtotal(),
-            'count' => count(cart()->items())
+            'count' => count(cart()->items()),
+            'discount' => \cart()->getDiscount(),
+            'newSubTotal' => \cart()->getSubtotal() - cart()->getDiscount(),
+            'payable' => \cart()->getSubtotal() - cart()->getDiscount() + cart()->tax()
+
         ]);
     }
 }

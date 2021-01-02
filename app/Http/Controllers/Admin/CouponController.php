@@ -35,19 +35,21 @@ class CouponController extends Controller
         ]);
 
         Coupon::create($validated);
-        return redirect()->route('coupons')->with('success', 'Coupon Created Success');
+        return redirect()->route('coupons.index')->with('success', 'Coupon Created Success');
     }
 
 
     public function show(Coupon $coupon)
     {
-
+        return view('admin.coupons.view', [
+            'coupon' => $coupon
+        ]);
     }
 
 
     public function edit(Coupon $coupon)
     {
-        return view('admin.coupon.edit', [
+        return view('admin.coupons.edit', [
             'coupon' => $coupon
         ]);
     }
@@ -55,16 +57,15 @@ class CouponController extends Controller
     public function update(Request $request, Coupon $coupon)
     {
         $validated = $request->validate([
-            'code' => ['required', 'unique:coupons' . $coupon],
+            'code' => ['required', 'unique:coupons,code,' . $coupon->id],
             'type' => ['required'],
             'percent_off' => ['nullable', 'integer'],
             'value' => ['nullable', 'integer']
         ]);
 
         $coupon->update($validated);
-        return redirect()->route('coupons')->with('success', 'Coupon Updated Success');
+        return redirect()->route('coupons.index')->with('success', 'Coupon Updated Success');
     }
-
 
     public function destroy(Coupon $coupon)
     {

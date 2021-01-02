@@ -16,20 +16,21 @@ class CouponController extends Controller
         if (!$coupon) {
             return redirect()->route('checkout')->with('error', 'Coupon Not Found, Please Try with different one');
         }
-        session()->put('coupon', [
-            'name' => $coupon->code,
-            'discount' => $coupon->discount(cart()->getSubtotal())
-        ]);
 
+        if (auth()->check()) {
+            auth()->user()->coupon()->create([
+                'name' => $coupon->code,
+                'discount' => $coupon->discount(cart()->getSubtotal())
+            ]);
+        }
         return redirect()->route('checkout')->with('success', 'Coupon Added Success');
     }
 
 
     public function destroy()
     {
-
+        auth()->user()->coupon()->delete();
         session()->forget('coupon');
-
         return redirect()->route('checkout')->with('success', 'Coupon Removed');
     }
 }

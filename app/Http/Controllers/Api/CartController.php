@@ -11,7 +11,6 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-
         cart()->setUser(auth()->id());
         Product::addToCart($request->product_id);
         return response()->json([
@@ -40,10 +39,10 @@ class CartController extends Controller
         ], 200);
     }
 
-    public function destroyCart($id)
+    public function destroyCart(Request $request)
     {
         cart()->setUser(auth()->id());
-        cart()->removeAt($id);
+        cart()->removeAt($request->index);
         return response()->json([
             'items' => cart()->toArray(),
             'message' => 'Item Remved'
