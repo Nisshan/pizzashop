@@ -15,6 +15,16 @@
 </div>
 @endif
 
+<div class="bg-gray py-1">
+    <div class="container">
+        <nav class="mt-5" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item "><a class="text-dark" href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
+            </ol>
+        </nav>
+    </div>
+</div>
 <section class="container mt-5 pb-4">
     <div class="row">
         <div class="col-lg-5 mb-4 mb-lg-0">

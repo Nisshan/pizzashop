@@ -66,7 +66,7 @@
 @endif
 
 @foreach($categories as $key => $category)
-<section class="container mt-2 @if($key == 0) mt-lg-5 @endif" id="{{$category->slug}}">
+<section class="container mt-2 @if($key == 0) pt-3 pt-lg-5 mt-lg-5 @endif" id="{{$category->slug}}">
     <div class="mb-4 pt-4">
         <h3 class="f-family-2">{{$category->name}}</h3>
         <span class="seperator my-2"></span>
