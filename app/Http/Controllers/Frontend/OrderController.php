@@ -10,14 +10,16 @@ class OrderController extends Controller
 {
     public function index()
     {
-        session()->forget('coupon');
-        $coupon = auth()->user()->coupon()->first();
 
-        if (auth()->check() && isset($coupon)) {
-            session()->put('coupon', [
-                'name' => $coupon->name,
-                'discount' => $coupon->discount
-            ]);
+        if (auth()->check()) {
+            session()->forget('coupon');
+            $coupon = auth()->user()->coupon()->first();
+            if (isset($coupon)) {
+                session()->put('coupon', [
+                    'name' => $coupon->name,
+                    'discount' => $coupon->discount
+                ]);
+            }
         }
         if (count(cart()->items()) < 1) {
             return redirect()->route('home')->with('error', 'No Items in Cart, Please Add Before Processing');
