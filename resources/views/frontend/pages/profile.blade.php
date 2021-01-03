@@ -67,38 +67,9 @@
                                         <h5 class="mb-0">Recent Activity</h5>
                                     </div>
                                     <div class="px-3 py-3 d-flex align-items-center border-bottom">
-                                        <table class="table overflow-x table-striped">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col">Item</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Quantity</th>
-                                                <th scope="col">Total</th>
-                                                <th scope="col">Date</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <th scope="row" class="d-flex">
-                                                    <figure class="mb-0 me-2">
-                                                        <img class="img-small obj-fit-cover rounded"
-                                                             src="https://picsum.photos/800/800" alt="">
-                                                    </figure>
-                                                    <div>
-                                                        <h6>Curry Veggie Delight</h6>
-                                                        <h6 class="text-success font-small">
-                                                            <span class="">Category:</span>
-                                                            Pizza
-                                                        </h6>
-                                                    </div>
-                                                </th>
-                                                <td>$ 10.00</td>
-                                                <td>10</td>
-                                                <td>$ 100.00</td>
-                                                <td>2020-10-12</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="table overflow-x table-striped table-responsive">
+                                            {!! $dataTable->table(['class'=>'display','style'=>'width:100%']) !!}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -205,3 +176,8 @@
     </section>
 
 @endsection
+
+@push('scripts')
+    <script src="{{asset('admin/js/delete.js')}}"></script>
+    {!! $dataTable->scripts() !!}
+@endpush

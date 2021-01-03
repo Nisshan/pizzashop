@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\DataTables\OrdersDatatable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class UsersController extends Controller
+class UserProfileController extends Controller
 {
-    public function index()
+    public function index(OrdersDatatable $ordersDatatable)
     {
-        return view('frontend.pages.profile');
+       return $ordersDatatable->render('frontend.pages.profile');
     }
 
     public function changeName(Request $request)
@@ -36,8 +37,12 @@ class UsersController extends Controller
                 'password' => $request->password
             ]);
             return back()->with('success', 'password changed');
-
         }
-
     }
+//
+//    public function orderDetails(OrdersDatatable $ordersDatatable)
+//    {
+//        return $ordersDatatable->render('frontend.pages.profile');
+//    }
+
 }

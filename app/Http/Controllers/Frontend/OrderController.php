@@ -10,7 +10,9 @@ class OrderController extends Controller
 {
     public function index()
     {
-
+        if (count(cart()->items()) < 1) {
+            return redirect()->route('home')->with('error', 'No Items in Cart, Please Add Before Processing');
+        }
         if (auth()->check()) {
             session()->forget('coupon');
             $coupon = auth()->user()->coupon()->first();
@@ -21,9 +23,7 @@ class OrderController extends Controller
                 ]);
             }
         }
-        if (count(cart()->items()) < 1) {
-            return redirect()->route('home')->with('error', 'No Items in Cart, Please Add Before Processing');
-        }
+
 
         cart()->refreshAllItemsData();
 

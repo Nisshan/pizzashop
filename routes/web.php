@@ -27,7 +27,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Homecontroller::class)->name('home');
 
-
 Auth::routes();
 
 //'verified';
@@ -52,21 +51,21 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 Route::group(['middleware' => ['auth', 'CanBuyProduct']], function () {
-    Route::get('/user/profile', [\App\Http\Controllers\Frontend\UsersController::class, 'index'])->name('user.profile');
-    Route::post('/user/change/name', [\App\Http\Controllers\Frontend\UsersController::class, 'changeName'])->name('user.change.name');
-    Route::post('/user/change/password', [\App\Http\Controllers\Frontend\UsersController::class, 'updatePassword'])->name('user.change.password');
+    Route::get('/user/profile', [\App\Http\Controllers\Frontend\UserProfileController::class, 'index'])->name('user.profile');
+    Route::post('/user/change/name', [\App\Http\Controllers\Frontend\UserProfileController::class, 'changeName'])->name('user.change.name');
+    Route::post('/user/change/password', [\App\Http\Controllers\Frontend\UserProfileController::class, 'updatePassword'])->name('user.change.password');
 
 });
 //Route::group(['middleware' => 'CanBuyProduct'], function () {
-    Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
-    Route::get('/checkout', [OrderController::class, 'index'])->name('checkout');
-    Route::post('/increase/cartItem', [CartController::class, 'increaseCartQuantity'])->name('increase.cart.quantity');
-    Route::post('/decrease/cartItem', [CartController::class, 'decreaseCartQuantity'])->name('decrease.cart.quantity');
-    Route::delete('/delete/cartItem/{id}', [CartController::class, 'destroyCart'])->name('remove.cart.item');
-    Route::post('/coupon/add', [CouponController::class, 'store'])->name('coupon.store');
-    Route::get('/coupon/delete', [CouponController::class, 'destroy'])->name('coupon.delete');
-    Route::post('/order/create', [OrderController::class, 'store'])->name('order');
-    Route::get('/{category:slug}/{product:slug}', SinglePageController::class)->name('single');
+Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
+Route::get('/checkout', [OrderController::class, 'index'])->name('checkout');
+Route::post('/increase/cartItem', [CartController::class, 'increaseCartQuantity'])->name('increase.cart.quantity');
+Route::post('/decrease/cartItem', [CartController::class, 'decreaseCartQuantity'])->name('decrease.cart.quantity');
+Route::delete('/delete/cartItem/{id}', [CartController::class, 'destroyCart'])->name('remove.cart.item');
+Route::post('/coupon/add', [CouponController::class, 'store'])->name('coupon.store');
+Route::get('/coupon/delete', [CouponController::class, 'destroy'])->name('coupon.delete');
+Route::post('/order/create', [OrderController::class, 'store'])->name('order');
+Route::get('/{category:slug}/{product:slug}', SinglePageController::class)->name('single');
 //});
 
 

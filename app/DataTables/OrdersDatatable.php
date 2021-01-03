@@ -37,10 +37,10 @@ class OrdersDatatable extends DataTable
             })->editColumn('user', function ($query) {
                 return $query->user->name;
             })->editColumn('status', function ($query) {
-                return '<button type="button" class="btn btn-primary change-status" data-toggle="modal" data-target="#exampleModal"  data-id='.$query->id.' data-status='.$query->status.'>
+                return '<button type="button" class="btn btn-primary change-status" data-toggle="modal" data-target="#exampleModal"  data-id=' . $query->id . ' data-status=' . $query->status . '>
                         ' . $query->status . '
                         </button>';
-            })->rawColumns(['status','action']);
+            })->rawColumns(['status', 'action']);
     }
 
     /**
@@ -51,7 +51,11 @@ class OrdersDatatable extends DataTable
      */
     public function query(Order $model)
     {
-        return $model->with('user:name,id')->newQuery();
+        if (auth()->user()->roleName() != 'User') {
+            return $model->with('user:name,id')->newQuery();
+        } else {
+            return $model->where('user_id', auth()->id())->newQuery();
+        }
     }
 
     /**
@@ -76,22 +80,35 @@ class OrdersDatatable extends DataTable
      */
     protected function getColumns()
     {
-        return [
-            Column::make('user')
-                ->name('user.name')
-                ->title('Created By')
-                ->orderable(true)
-                ->searchable(true),
-            'quantity',
-            'total_amount',
-            'delivery_at',
-            'status',
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->searchable(false)
+        if (auth()->user()->roleName() != 'User') {
+            return [
+                Column::make('user')
+                    ->name('user.name')
+                    ->title('Created By')
+                    ->orderable(true)
+                    ->searchable(true),
+                'quantity',
+                'total_amount',
+                'delivery_at',
+                'status',
+                Column::computed('action')
+                    ->exportable(false)
+                    ->printable(false)
+                    ->searchable(false)
+            ];
+        }else{
+            return [
+                'quantity',
+                'total_amount',
+                'delivery_at',
+                'status',
+                Column::computed('action')
+                    ->exportable(false)
+                    ->printable(false)
+                    ->searchable(false)
+            ];
+        }
 
-        ];
     }
 
     /**
