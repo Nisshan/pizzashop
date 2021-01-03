@@ -1,6 +1,6 @@
 body {
     position: relative;
-    padding-top: 110px;
+    padding-top: 75px;
     font-family: "Roboto", sans-serif;
     background-color: #ffffff;
 }
@@ -121,7 +121,7 @@ header .bg-light {
 }
 .img-small {
     width: 80px;
-    height: 60px;
+    height: 80px;
 }
 .img-60 {
     height: 60px;
@@ -226,7 +226,7 @@ footer {
     width: 100%;
     height: auto;
     position: sticky;
-    top: 100px;
+    top: 85px;
 }
 /* Radio Button */
 /* 

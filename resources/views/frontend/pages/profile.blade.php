@@ -15,12 +15,12 @@
                     <figure class="mb-0 position-relative img-170 mx-auto">
                         <img class="img-fluid img-170 rounded-circle obj-fit-cover"
                              src="https://www.jpal.co.jp/storage/profile/male.png">
-{{--                        <div class="change-profile-btn-container">--}}
-{{--                            <div class="file-upload">--}}
-{{--                                <i class="fa fa-pencil font-medium"></i>--}}
-{{--                                <input type="file" id="userProfilePicture" name="myImage" accept="image/*" data-url="">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="change-profile-btn-container">--}}
+                        {{--                            <div class="file-upload">--}}
+                        {{--                                <i class="fa fa-pencil font-medium"></i>--}}
+                        {{--                                <input type="file" id="userProfilePicture" name="myImage" accept="image/*" data-url="">--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
                     </figure>
                     <div class="mt-3">
                         <h4 class="font-weight-normal">{{auth()->user()->name}}</h4>
