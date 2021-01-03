@@ -58,7 +58,7 @@ Route::group(['middleware' => ['auth', 'CanBuyProduct']], function () {
 
 });
 //Route::group(['middleware' => 'CanBuyProduct'], function () {
-Route::get('/thankyou', ThankYouController::class);
+Route::get('/thankyou', ThankYouController::class)->name('thankyou');
 Route::get('/carts/view', [CartController::class, 'index'])->name('cart.view');
 Route::post('/addTo/cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('/checkout', [OrderController::class, 'index'])->name('checkout');
