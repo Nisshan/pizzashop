@@ -218,7 +218,6 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit"> submit</button>
                 </form>
 
                 <div class="form-group row pb-4">
