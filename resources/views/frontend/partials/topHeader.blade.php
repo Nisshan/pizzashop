@@ -16,7 +16,7 @@
     </figure>
     @if(count( cart()->items()))
     <div class="position-relative">
-        <a href="{{route('checkout')}}"
+        <a href="{{route('cart.view')}}"
             class="btn btn-outline-dark d-flex align-items-center rounded-pill position-absolute checkout">
             Checkout
             <span class="bg-dark text-white ms-2">{{count( cart()->items()) ?: ""}}</span>

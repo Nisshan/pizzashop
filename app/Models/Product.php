@@ -49,6 +49,11 @@ class Product extends Model
 
     }
 
+    public function getImage()
+    {
+        return $this->cover ? url('storage/thumb/' . $this->cover) : '/images/logo.png';
+    }
+
 
     public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
@@ -97,5 +102,6 @@ class Product extends Model
     {
         return url('storage/thumb/' . $this->cover);
     }
+
 
 }

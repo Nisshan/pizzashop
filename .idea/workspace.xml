@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2221aaab-bda4-44dd-bf2d-d9360ce6157f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/pages/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/pages/cart.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/pages/thankYou.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/pages/thankYou.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/topHeader.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/topHeader.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +246,7 @@
       <workItem from="1609558155280" duration="13498000" />
       <workItem from="1609648282722" duration="731000" />
       <workItem from="1609684299854" duration="10000" />
-      <workItem from="1609684388399" duration="3384000" />
+      <workItem from="1609684388399" duration="6594000" />
     </task>
     <servers />
   </component>

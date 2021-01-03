@@ -8,11 +8,46 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+        if (count(cart()->items()) < 1) {
+            return redirect()->route('home')->with('error', 'No Items in Cart, Please Add Before Processing');
+        }
+        if (auth()->check()) {
+            session()->forget('coupon');
+            $coupon = auth()->user()->coupon()->first();
+            if (isset($coupon)) {
+                session()->put('coupon', [
+                    'name' => $coupon->name,
+                    'discount' => $coupon->discount
+                ]);
+            }
+        }
+
+
+        cart()->refreshAllItemsData();
+
+        $discount = session()->get('coupon')['discount'] ?? 0;
+
+        $newSubTotal = cart()->getSubtotal() - $discount;
+
+        return view('frontend.pages.cart', [
+            'items' => cart()->items(),
+            'tax' => cart()->tax(),
+            'transaction' => cart()->totals(),
+            'subtotal' => cart()->getSubtotal(),
+            'count' => count(cart()->items()),
+            'discount' => $discount,
+            'newSubTotal' => $newSubTotal,
+            'payable' => $newSubTotal + cart()->tax()
+        ]);
+    }
+
     public function addToCart(Request $request)
     {
         cart()->setUser(auth()->id());
         Product::addToCart($request->product_id);
-        return redirect()->back()->with('success', 'Item Added To Cart');
+        return redirect()->route('cart.view')->with('success', 'Item Added To Cart');
     }
 
     public function increaseCartQuantity(Request $request)

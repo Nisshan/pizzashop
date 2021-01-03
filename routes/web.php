@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\CouponController;
 use App\Http\Controllers\Frontend\Homecontroller;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\SinglePageController;
+use App\Http\Controllers\ThankYouController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -57,7 +58,9 @@ Route::group(['middleware' => ['auth', 'CanBuyProduct']], function () {
 
 });
 //Route::group(['middleware' => 'CanBuyProduct'], function () {
-Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
+Route::get('/thankyou', ThankYouController::class);
+Route::get('/carts/view', [CartController::class, 'index'])->name('cart.view');
+Route::post('/addTo/cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('/checkout', [OrderController::class, 'index'])->name('checkout');
 Route::post('/increase/cartItem', [CartController::class, 'increaseCartQuantity'])->name('increase.cart.quantity');
 Route::post('/decrease/cartItem', [CartController::class, 'decreaseCartQuantity'])->name('decrease.cart.quantity');
