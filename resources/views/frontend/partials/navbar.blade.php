@@ -56,7 +56,7 @@
                             </a>
                             <div class="dropdown-divider"></div>
                             @if(count( cart()->items()))
-                                <a class="dropdown-item px-3 py-2" href="{{route('checkout')}}">
+                                <a class="dropdown-item px-3 py-2" href="{{route('cart.view')}}">
                                     <div class="d-flex align-items-center">
                                         <i class="fa fa-cart-plus font-xl me-3 text-muted"></i>
                                         <span class="font-1">My Cart</span>

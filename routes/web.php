@@ -41,7 +41,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('products', ProductsController::class);
         Route::resource('orders', OrdersController::class)->except('create');
         Route::resource('coupons', App\Http\Controllers\Admin\CouponController::class);
-        Route::post('/orders/changeStatus', [OrdersController::class, 'changeStatus']);
+        Route::post('/orders/changeStatus', [OrdersController::class, 'changeStatus'])->name('changeStatus');
         Route::get('menu', [CategoriesOrderController::class, 'index'])->name('menu');
         Route::post('/update/menu', [CategoriesOrderController::class, 'updateOrder'])->name('update.position');
     });
@@ -52,9 +52,11 @@ Route::group(['middleware' => ['auth', 'CanBuyProduct', 'verified']], function (
     Route::get('/user/profile', [\App\Http\Controllers\Frontend\UserProfileController::class, 'index'])->name('user.profile');
     Route::post('/user/change/name', [\App\Http\Controllers\Frontend\UserProfileController::class, 'changeName'])->name('user.change.name');
     Route::post('/user/change/password', [\App\Http\Controllers\Frontend\UserProfileController::class, 'updatePassword'])->name('user.change.password');
+    Route::get('/order/view/{order}',[OrderController::class, 'view'])->name('orders.view');
+    Route::get('/order/cancel/{order}',[OrderController::class, 'cancel'])->name('orders.cancel');
 
 });
-Route::group(['middleware' => ['CanBuyProduct', 'verified']], function () {
+Route::group(['middleware' => 'CanBuyProduct'], function () {
     Route::get('/thankyou', ThankYouController::class)->name('thankyou');
     Route::get('/carts/view', [CartController::class, 'index'])->name('cart.view');
     Route::post('/addTo/cart', [CartController::class, 'addToCart'])->name('cart');

@@ -115,7 +115,7 @@ class OrderController extends Controller
             'deliveryTime' => $request->deliveryTime,
             'delivery_date' => $request->delivery_date,
             'quantity' => count(cart()->items()),
-            'status' => 'In review'
+            'status' => 'InReview'
 
         ]);
 
@@ -129,5 +129,20 @@ class OrderController extends Controller
         }
 
         return $order;
+    }
+
+
+    public function view(Order $order)
+    {
+        return view('frontend.pages.order', [
+            'order' => $order
+        ]);
+    }
+
+    public function cancel(Order $order)
+    {
+        $order->status = 'Canceled';
+        $order->save();
+        return back()->with('success', 'order Cancelled');
     }
 }

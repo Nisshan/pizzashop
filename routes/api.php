@@ -42,6 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/delete/cartItem', [CartController::class, 'destroyCart']);
     Route::post('/apply/coupon', [CouponController::class, 'apply']);
     Route::post('/remove/coupon',[CouponController::class,'remove']);
+    Route::post('/order/create', [OrderController::class,'store']);
 });
 
 Route::get('/{product}', [HomeController::class, 'single']);

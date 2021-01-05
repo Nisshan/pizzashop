@@ -28,16 +28,15 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{url('/orders/changeStatus')}}" method="post">
+                <form action="{{route('changeStatus')}}" method="post">
                     @csrf
                     <div class="modal-body">
                         <input type="text" hidden name="order_id" id="order_id">
                         <div class="form-group">
                             <select class="form-control" name="status" id="status">
-                                <option value="Canceled">Canceled</option>
-                                <option value="Delivered">Delivered</option>
-                                <option value="Inreview">Inreview</option>
-                                <option value="Pending">Pending</option>
+                                @foreach(config('deliverystatus.status') as $key => $status)
+                                    <option value="{{$key}}">{{$key}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

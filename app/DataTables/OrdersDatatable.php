@@ -23,23 +23,42 @@ class OrdersDatatable extends DataTable
         return datatables($query)
             ->addColumn('action', function ($query) {
 
-                $view = view('shared.buttons.view')
-                    ->with(['route' => route('orders.show', ['order' => $query->id])])->render();
+                if (auth()->user()->isUser()) {
+                    $view = view('shared.buttons.view')
+                        ->with(['route' => route('orders.view', ['order' => $query->id])])->render();
+                    if ($query->status != 'Canceled') {
+                        $cancel = view('shared.buttons.cancel')
+                            ->with(['route' => route('orders.cancel', ['order' => $query->id])])->render();
+                        $view .= $cancel;
+                    }
+                } else {
+
+                    $view = view('shared.buttons.view')
+                        ->with(['route' => route('orders.show', ['order' => $query->id])])->render();
+                }
+
 
                 if (auth()->user()->isAdmin()) {
-                    $delete = view('shared.buttons.delete')
-                        ->with(['route' => route('orders.destroy', ['order' => $query->id])])->render();
-                    $view .= $delete;
+                    if (!in_array($query->status, ['Canceled', 'Delivered'])) {
+                        $delete = view('shared.buttons.delete')
+                            ->with(['route' => route('orders.destroy', ['order' => $query->id])])->render();
+                        $view .= $delete;
+                    }
                 }
                 return $view;
             })->editColumn('delivery_at', function ($query) {
                 return Carbon::parse($query->delivery_at)->format('Y-m-d h:i:s');
             })->editColumn('user', function ($query) {
-                return $query->user->name;
+                return $query->user->name ?? 'Guest Order';
             })->editColumn('status', function ($query) {
-                return '<button type="button" class="btn btn-primary change-status" data-toggle="modal" data-target="#exampleModal"  data-id=' . $query->id . ' data-status=' . $query->status . '>
+                if (in_array($query->status, ['Delivered', 'Canceled'])) {
+                    return '<span class="btn ' . config('deliverystatus.status.' . $query->status) . '">' . $query->status . '</span>';
+                } else {
+                    return '<button type="button" class="btn ' . config('deliverystatus.status.' . $query->status) . ' change-status" data-toggle="modal" data-target="#exampleModal"  data-id=' . $query->id . ' data-status=' . $query->status . '>
                         ' . $query->status . '
                         </button>';
+                }
+
             })->rawColumns(['status', 'action']);
     }
 
@@ -88,19 +107,19 @@ class OrdersDatatable extends DataTable
                     ->orderable(true)
                     ->searchable(true),
                 'quantity',
-                'total_amount',
-                'delivery_at',
+                Column::make('billing_name')
+                    ->title('Name')
+                    ->orderable(true)
+                    ->searchable(true),
                 'status',
                 Column::computed('action')
                     ->exportable(false)
                     ->printable(false)
                     ->searchable(false)
             ];
-        }else{
+        } else {
             return [
                 'quantity',
-                'total_amount',
-                'delivery_at',
                 'status',
                 Column::computed('action')
                     ->exportable(false)

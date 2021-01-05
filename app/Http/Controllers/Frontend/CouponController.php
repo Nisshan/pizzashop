@@ -31,7 +31,7 @@ class CouponController extends Controller
                 'discount' => $discount
             ]);
         }
-        return redirect()->route('checkout')->with('success', 'Coupon Added Success');
+        return redirect()->route('cart.view')->with('success', 'Coupon Added Success');
     }
 
 
@@ -41,6 +41,6 @@ class CouponController extends Controller
             auth()->user()->coupon()->delete();
         }
         session()->forget('coupon');
-        return redirect()->route('checkout')->with('success', 'Coupon Removed');
+        return redirect()->route('cart.view')->with('success', 'Coupon Removed');
     }
 }
