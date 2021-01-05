@@ -10,7 +10,7 @@
 {{-- Navbar with Profile for Mobile View Only --}}
 @auth
 @if(auth()->user()->isUser())
-<div class="d-flex justify-content-end w-100 border-bottom d-block d-lg-none">
+<div class="d-flex justify-content-end w-100 border-bottom d-block d-lg-none mt-4 pt-2">
     <div class="dropdown">
         <button class="dropdown-toggle bg-transparent border-0 d-flex align-items-center py-2" type="button"
             id="dropdownProfile" data-bs-toggle="dropdown" aria-expanded="false">
