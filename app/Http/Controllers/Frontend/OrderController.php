@@ -8,6 +8,8 @@ use App\Models\OrderProduct;
 use Cartalyst\Stripe\Exception\CardErrorException;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 class OrderController extends Controller
 {
@@ -61,7 +63,7 @@ class OrderController extends Controller
                 'description' => 'Order',
                 'receipt_email' => $request->email,
                 'metadata' => [
-                   'text' => 'something'
+                    'text' => 'something'
                 ],
             ]);
 
@@ -107,7 +109,7 @@ class OrderController extends Controller
             'billing_discount' => $discount,
             'billing_subtotal' => $newSubTotal,
             'billing_tax' => cart()->tax(),
-            'billing_total' =>$newSubTotal + cart()->tax(),
+            'billing_total' => $newSubTotal + cart()->tax(),
             'error' => $error,
             'service_type' => $request->serviceType,
             'street_address' => $request->street_address,
@@ -126,6 +128,7 @@ class OrderController extends Controller
                 'order_id' => $order->id,
                 'product_id' => $item['modelId'],
                 'quantity' => $item['quantity'],
+                'updated_at' => Carbon::now(),
             ]);
         }
 

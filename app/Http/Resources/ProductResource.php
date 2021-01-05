@@ -20,6 +20,7 @@ class ProductResource extends JsonResource
             'offer_type' => $this->offer_type,
             'amount_off' => $this->amount_off,
             'percent_off' => $this->percent_off,
+            'price' => $this->price,
             'path' => ProductImageResource::collection($this->images),
         ];
     }
