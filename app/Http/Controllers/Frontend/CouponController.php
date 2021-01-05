@@ -37,7 +37,9 @@ class CouponController extends Controller
 
     public function destroy()
     {
-        auth()->user()->coupon()->delete();
+        if (auth()->check()) {
+            auth()->user()->coupon()->delete();
+        }
         session()->forget('coupon');
         return redirect()->route('checkout')->with('success', 'Coupon Removed');
     }

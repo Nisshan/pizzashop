@@ -57,52 +57,126 @@
                 <!-- Contact Details -->
                     <h5 class="my-3">Billing Details</h5>
 
-                    {{--                    @if(!auth()->user())--}}
-
                     <div class="mb-3">
                         <label for="emailAddress" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="emailAddress" placeholder="Email">
+                        <input type="email" class="form-control" id="emailAddress" placeholder="Email" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Name">
+                        <input type="text" class="form-control" id="name" placeholder="Name" required>
                     </div>
-                    {{--                    @endif--}}
+
 
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="Address" name="address">
+                        <input type="text" class="form-control" id="address" placeholder="Address" name="address"
+                               required>
                     </div>
 
                     <div class="row g-2">
                         <div class="col-12 col-md mb-3">
                             <label for="city" class="form-label">City</label>
-                            <input type="text" class="form-control" id="city" placeholder="city" name="city">
+                            <input type="text" class="form-control" id="city" placeholder="city" name="city" required>
                         </div>
                         <div class="col-12 col-md mb-3">
                             <label for="province" class="form-label">Province</label>
                             <input type="text" class="form-control" id="province" placeholder="Province"
-                                   name="province">
+                                   name="province" required>
                         </div>
                     </div>
-                    <div class="row g-2">
+                    <div class="row g-2 border-bottom">
                         <div class="col-12 col-md mb-3">
                             <label for="postalcode" class="form-label">Postal Code</label>
                             <input type="number" class="form-control" id="postalcode" placeholder="Postal Code"
-                                   name="postalcode">
+                                   name="postalcode" required>
                         </div>
                         <div class="col-12 col-md mb-3">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="phone" placeholder="phone">
+                            <input type="text" class="form-control" id="phone" placeholder="phone" required>
+                        </div>
+                    </div>
+                    <div class="form-group row border-bottom pb-4 mb-3">
+                        <h4 class="col-md-4 col-form-label font-large fw-bold">
+                            Service Type
+                        </h4>
+                        <div class="col-md-8">
+                            <div class="form-group row">
+                                <div class="form-check col-md-4">
+                                    <label class="form-check-label" for="pickup">
+                                        <input class="form-check-input togglerHide" type="radio" name="serviceType"
+                                               id="pickup"
+                                               value="pickup" data-toShow="pickup" data-toHide="delivery"
+                                               data-id="#pickup"
+                                               checked/>
+                                        <span> Pickup </span>
+                                    </label>
+                                </div>
+                                <div class="form-check col-md-4">
+                                    <label class="form-check-label" for="delivery">
+                                        <input class="form-check-input togglerHide" type="radio" name="serviceType"
+                                               id="delivery" value="option2" data-toShow="delivery" data-toHide="pickup"
+                                               data-id="#delivery"/>
+                                        <span> Delivery</span>
+                                    </label>
+                                </div>
+                                <!-- Delevery Option -->
+                                <div class="delivery my-3 d-none">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Enter Your Street Address"
+                                               aria-label="Your Street Address" name="street_address"/>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md mb-3 mb-md-0">
+                                            <input type="text" class="form-control" placeholder="Optional"
+                                                   name="optional"/>
+                                        </div>
+                                        <div class="col-12 col-md">
+                                            <input type="text" class="form-control"
+                                                   placeholder="Notes, Instruction, etc" name="note"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
+                    <div class="form-group row border-bottom pb-4 mb-3">
+                        <h4 for="staticEmail" class="col-md-4 col-form-label font-large fw-bold">
+                            Delivery At
+                        </h4>
+                        <div class="col-md-8 ">
+                            <div class="form-group row">
+                                <div class="form-check col-md-4">
+                                    <label class="form-check-label" for="asap">
+                                        <input class="form-check-input togglerHide" type="radio" name="deliveryTime"
+                                               id="asap"
+                                               value="1" data-toHide="scheduledDateTime" data-id="#asap" checked/>
+                                        <span> ASAP </span>
+                                    </label>
+                                </div>
+
+                                <div class="form-check col-md-4">
+                                    <label class="form-check-label" for="scheduled">
+                                        <input class="form-check-input togglerHide" type="radio" name="deliveryTime"
+                                               id="scheduled" value="0" data-toShow="scheduledDateTime"
+                                               data-id="#scheduled"/>
+                                        <span> Scheduled </span>
+                                    </label>
+                                </div>
+                                <div class="scheduledDateTime py-3 d-none">
+                                    <input id="datePicker" class="dateTimeFlatPicker form-control" type="text"
+                                           placeholder="Select Date.." data-input name="delivery_date"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row g-2 mt-3">
                         <h5>Payment Details</h5>
                         <div class="mb-3">
                             <label for="name_on_card" class="form-label">Name on Card</label>
-                            <input type="text" class="form-control" id="name_on_card" name="name_on_card"
+                            <input type="text" class="form-control" id="name_on_card"
+                                   name="name_on_card"
                                    placeholder="Name On Card">
                         </div>
                         <div class="col-12 col-md mb-3">
@@ -117,7 +191,6 @@
                             <div id="card-errors" role="alert"></div>
                         </div>
                     </div>
-
                     <div class="col-12 text-center mb-4 order-box">
                         <div class="d-flex">
                             <button type="submit"
@@ -214,7 +287,10 @@
 
 @push('scripts')
     <script>
+
+
         (function () {
+
             // Create a Stripe client.
             var stripe = Stripe('pk_test_51I4qgBG3cwW9OgFg6qGrwjfqL4pGXhT67QzQUidhvJekmmMnwWPkqVUy2jXkzDonLjd6m8cf0PIY4Y96uqqkC2e4006TtP0OQn');
             // Create an instance of Elements.
@@ -243,9 +319,7 @@
                     hidePostalCode: true
                 }
             );
-            // Add an instance of the card Element into the `card-element` <div>.
             card.mount('#card-element');
-            // Handle real-time validation errors from the card Element.
             card.on('change', function (event) {
                 var displayError = document.getElementById('card-errors');
                 if (event.error) {
@@ -254,15 +328,16 @@
                     displayError.textContent = '';
                 }
             });
+
             // Handle form submission.
             var form = document.getElementById('payment-form');
 
             // Disable the submit button to prevent repeated clicks
-            document.getElementById('complete-order').disabled = true;
-
 
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
+                document.getElementById('complete-order').disabled = true;
+
                 var options = {
                     name: document.getElementById('name_on_card').value,
                     address_line1: document.getElementById('address').value,
@@ -295,6 +370,11 @@
                 // Submit the form
                 form.submit();
             }
+
+            // Add an instance of the card Element into the `card-element` <div>.
+
+            // Handle real-time validation errors from the card Element.
+
         })();
     </script>
 @endpush
