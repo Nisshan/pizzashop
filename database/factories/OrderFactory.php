@@ -24,8 +24,6 @@ class OrderFactory extends Factory
     {
         return [
             'quantity' => rand(1,5),
-            'total_amount' => rand(10,100),
-            'delivery_at' => Carbon::now()->addWeeks(rand(1, 52))->format('Y-m-d H:i:s'),
             'status' => $this->faker->randomElement(['In review','Pending','Canceled','Delivered'])
         ];
     }

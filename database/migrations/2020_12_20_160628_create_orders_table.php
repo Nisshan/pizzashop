@@ -15,13 +15,30 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->unsignedBigInteger('quantity');
-            $table->unsignedBigInteger('total_amount');
-            $table->dateTime('delivery_at')->nullable();
             $table->dateTime('delivered_at')->nullable();
             $table->string('status');
-            $table->text('note')->nullable();
+            $table->string('billing_email')->nullable();
+            $table->string('billing_name')->nullable();
+            $table->string('billing_address')->nullable();
+            $table->string('billing_city')->nullable();
+            $table->string('billing_province')->nullable();
+            $table->string('billing_postalcode')->nullable();
+            $table->string('billing_phone')->nullable();
+            $table->string('billing_name_on_card')->nullable();
+            $table->integer('billing_discount')->default(0);
+            $table->string('billing_discount_code')->nullable();
+            $table->integer('billing_subtotal')->nullable();
+            $table->integer('billing_tax')->nullable();
+            $table->integer('billing_total')->nullable();
+            $table->string('service_type')->nullable();
+            $table->string('street_address')->nullable();
+            $table->string('optional')->nullable();
+            $table->string('note')->nullable();
+            $table->string('deliveryTime')->nullable();
+            $table->text('error')->nullable();
+            $table->dateTime('delivery_date')->nullable();
             $table->timestamps();
         });
     }
