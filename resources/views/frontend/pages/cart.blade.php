@@ -17,21 +17,8 @@
     <div class="row">
         <h5 class="text-center py-3">Shopping Cart</h5>
         <div class="col-12">
-            <div class="border-top pt-3">
+            <div class="border-top pt-3 overflow-x">
                 <table class="table overflow-x">
-                    <thead>
-                        <tr>
-                            <th scope="col">Item</th>
-                            {{-- @if(session()->get('coupon')) --}}
-                            <th scope="col">Discount</th>
-                            {{-- @endif --}}
-                            <th scope="col">Price</th>
-                            <th scope="col">Action</th>
-                            <th scope="col">Total</th>
-
-                        </tr>
-
-                    </thead>
                     <tbody>
                         @if($count)
                         @foreach($items as $key => $item)
@@ -56,18 +43,6 @@
                                 </div>
                             </th>
                             {{-- @if(session()->get('coupon')) --}}
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <p class="font-medium me-3 mb-0">-${{$discount}}</p>
-                                    <form action="{{route('coupon.delete')}}">
-                                        @csrf
-                                        <a type="submit" class="btn btn-outline-danger p-1">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </form>
-
-                                </div>
-                            </td>
                             {{-- @endif --}}
 
                             <td>$ {{$item['price']}}</td>
@@ -103,9 +78,24 @@
                 </table>
             </div>
         </div>
-        <div
-            class="col-12 col-md-6 pb-3 mt-3 mt-md-0 bg-gray-dark border p-2 mx-auto border-top border-secondary border-1 border-0">
-            <div class="">
+        <div class="col-12 col-md-6 mx-auto">
+            @if(!session()->get('coupon'))
+            <form action="{{route('coupon.store')}}" method="post">
+                @csrf
+                <div class="input-group my-3">
+                    <label for="cuponCode" class="form-label col-12 fw-bold">COUPON CODE</label>
+                    <div class="d-flex">
+                        <input type="text" class="form-control rounded-0" aria-label="Coupon code input box"
+                            placeholder="Enter Coupon Code" id="cuponCode" name="coupon">
+                        <button type="submit" class="btn btn-dark rounded-0">APPLY</button>
+                    </div>
+                </div>
+            </form>
+            @endif
+        </div>
+
+        <div class="col-12 pb-3 mt-3 mt-md-0">
+            <div class="col-md-6 bg-gray-dark border p-2 mx-auto border-top border-secondary border-1 border-0">
                 <div class="col-6 d-flex ms-auto">
                     <p class="flex-grow-1 fw-bold mb-1">SUBTOTAL</p>
                     <p class="flex-shrink-1 mb-1"> {{$transaction['Subtotal']}}</p>
@@ -117,6 +107,16 @@
                 <div class="col-6 d-flex ms-auto">
                     <p class="flex-grow-1 fw-bold mb-1">TOTAL</p>
                     <p class="flex-shrink-1 mb-1">${{$payable}}</p>
+                </div>
+                <div class="col-6 ms-auto mb-3">
+                    <form action="{{route('coupon.delete')}}" class="d-flex ">
+                        @csrf
+                        <p class="flex-grow-1 fw-bold mb-1">Discount<button type="submit"
+                                class="btn btn-danger p-1 ms-3 flex-shrink-1">
+                                <i class="fa fa-trash "></i>
+                            </button></p>
+                        <p class="font-medium mb-2">-${{$discount}}</p>
+                    </form>
                 </div>
                 <div class="d-flex justify-content-between">
                     <a href="/" class="btn btn-outline-dark rounded-0">Continue Shopping</a>
