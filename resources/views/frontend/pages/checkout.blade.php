@@ -292,7 +292,7 @@
         (function () {
 
             // Create a Stripe client.
-            var stripe = Stripe('pk_test_51I4qgBG3cwW9OgFg6qGrwjfqL4pGXhT67QzQUidhvJekmmMnwWPkqVUy2jXkzDonLjd6m8cf0PIY4Y96uqqkC2e4006TtP0OQn');
+            var stripe = Stripe('{{ config('services.stripe.key') }}');
             // Create an instance of Elements.
             var elements = stripe.elements();
             // Custom styling can be passed to options when creating an Element.

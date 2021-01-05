@@ -69,9 +69,6 @@ class OrderController extends Controller
 
             $this->addToOrdersTables($request, null);
 
-            // decrease the quantities of all the products in the cart
-//            $this->decreaseQuantities();
-
             cart()->clear();
             session()->forget('coupon');
             if (auth()->check()) {
@@ -128,7 +125,6 @@ class OrderController extends Controller
                 'order_id' => $order->id,
                 'product_id' => $item['modelId'],
                 'quantity' => $item['quantity'],
-                'updated_at' => Carbon::now(),
             ]);
         }
 
