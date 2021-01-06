@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CouponController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\VerificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +30,6 @@ Route::post('/register', [RegisterController::class, 'handle']);
 Route::post('/login', [LoginController::class, 'handle']);
 
 
-
 Route::get('/', [HomeController::class, 'home']);
 
 
@@ -41,9 +41,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/decrease/cartItem', [CartController::class, 'decreaseCartQuantity']);
     Route::post('/delete/cartItem', [CartController::class, 'destroyCart']);
     Route::post('/apply/coupon', [CouponController::class, 'apply']);
-    Route::post('/remove/coupon',[CouponController::class,'remove']);
-    Route::post('/order/create', [OrderController::class,'store']);
-    Route::post('/order/changeStatus',[OrderController::class,'changeStatus']);
+    Route::post('/remove/coupon', [CouponController::class, 'remove']);
+    Route::post('/order/create', [OrderController::class, 'store']);
+    Route::post('/order/changeStatus', [OrderController::class, 'changeStatus']);
+
+
 });
+
+Route::get('/email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
+
+Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 
 Route::get('/{product}', [HomeController::class, 'single']);

@@ -9,6 +9,7 @@ use Cartalyst\Stripe\Exception\CardErrorException;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Config;
 
 
 class OrderController extends Controller
@@ -51,6 +52,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+
         $discount = session()->get('coupon')['discount'] ?? 0;
 
         $newSubTotal = cart()->getSubtotal() - $discount;

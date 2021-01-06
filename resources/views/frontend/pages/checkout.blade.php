@@ -122,7 +122,8 @@
                                 <div class="form-check col-md-4">
                                     <label class="form-check-label" for="delivery">
                                         <input class="form-check-input togglerHide" type="radio" name="serviceType"
-                                               id="delivery" value="delivery" data-toShow="delivery" data-toHide="pickup"
+                                               id="delivery" value="delivery" data-toShow="delivery"
+                                               data-toHide="pickup"
                                                data-id="#delivery"/>
                                         <span> Delivery</span>
                                     </label>
@@ -181,6 +182,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row g-2 mt-3">
                         <h5>Payment Details</h5>
                         <div class="mb-3">
@@ -277,7 +279,6 @@
     <script>
         (function () {
 
-            // Create a Stripe client.
             var stripe = Stripe('{{ config('services.stripe.key') }}');
             // Create an instance of Elements.
             var elements = stripe.elements();
@@ -302,14 +303,31 @@
             var card = elements.create('card',
                 {
                     style: style,
-                    hidePostalCode: true
+                    hidePostalCode: true,
                 }
             );
+
             card.mount('#card-element');
+
+
             card.on('change', function (event) {
                 var displayError = document.getElementById('card-errors');
                 if (event.error) {
                     displayError.textContent = event.error.message;
+                    document.getElementById('complete-order').disabled = false;
+                } else {
+                    displayError.textContent = '';
+                }
+                {
+                    empty: true
+                }
+            });
+
+            card.on('change', function (event) {
+                var displayError = document.getElementById('card-errors');
+                if (event.error) {
+                    displayError.textContent = event.error.message;
+                    document.getElementById('complete-order').disabled = false;
                 } else {
                     displayError.textContent = '';
                 }
@@ -357,9 +375,6 @@
                 form.submit();
             }
 
-            // Add an instance of the card Element into the `card-element` <div>.
-
-            // Handle real-time validation errors from the card Element.
 
         })();
     </script>

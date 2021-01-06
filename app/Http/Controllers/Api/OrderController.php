@@ -101,11 +101,11 @@ class OrderController extends Controller
             'service_type' => $request->serviceType,
             'street_address' => $request->street_address,
             'optional' => $request->optional,
-            'note' => 'note',
+            'note' => $request->note,
             'deliveryTime' => $request->deliveryTime,
             'delivery_date' => $request->delivery_date,
             'quantity' => count(cart()->items()),
-            'status' => 'In review'
+            'status' => 'InReview'
         ]);
 
         // Insert into order_product table

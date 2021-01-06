@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class CartController extends Controller
 {
@@ -31,6 +32,7 @@ class CartController extends Controller
 
         $newSubTotal = cart()->getSubtotal() - $discount;
 
+
         return view('frontend.pages.cart', [
             'items' => cart()->items(),
             'tax' => cart()->tax(),
@@ -39,13 +41,13 @@ class CartController extends Controller
             'count' => count(cart()->items()),
             'discount' => $discount,
             'newSubTotal' => $newSubTotal,
+            'deliveryCharge' => cart()->getShippingCharges(),
             'payable' => $newSubTotal + cart()->tax()
         ]);
     }
 
     public function addToCart(Request $request)
     {
-        cart()->setUser(auth()->id());
         Product::addToCart($request->product_id);
         return redirect()->route('cart.view')->with('success', 'Item Added To Cart');
     }
