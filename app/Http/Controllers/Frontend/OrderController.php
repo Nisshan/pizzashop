@@ -56,7 +56,7 @@ class OrderController extends Controller
         $newSubTotal = cart()->getSubtotal() - $discount;
 
         try {
-            Stripe::charges()->create([
+            $stripe = Stripe::charges()->create([
                 'amount' => $newSubTotal + cart()->tax(),
                 'currency' => 'USD',
                 'source' => $request->stripeToken,
@@ -67,7 +67,7 @@ class OrderController extends Controller
                 ],
             ]);
 
-            $this->addToOrdersTables($request, null);
+            $this->addToOrdersTables($request, null, $stripe);
 
             cart()->clear();
             session()->forget('coupon');
@@ -80,12 +80,12 @@ class OrderController extends Controller
 
             return redirect()->route('thankyou')->with('success', 'Thank you! Your payment has been successfully accepted!');
         } catch (CardErrorException $e) {
-            $this->addToOrdersTables($request, $e->getMessage());
+            $this->addToOrdersTables($request, $e->getMessage(), null);
             return back()->withErrors('Error! ' . $e->getMessage());
         }
     }
 
-    protected function addToOrdersTables($request, $error)
+    protected function addToOrdersTables($request, $error, $stripe)
     {
 
         $discount = session()->get('coupon')['discount'] ?? 0;
@@ -99,6 +99,7 @@ class OrderController extends Controller
             'billing_name' => $request->name,
             'billing_address' => $request->address,
             'billing_city' => $request->city,
+            'charge_id' => $stripe['id'],
             'billing_province' => $request->province,
             'billing_postalcode' => $request->postalcode,
             'billing_phone' => $request->phone,
@@ -111,7 +112,7 @@ class OrderController extends Controller
             'service_type' => $request->serviceType,
             'street_address' => $request->street_address,
             'optional' => $request->optional,
-            'note' => 'note',
+            'note' => $request->note,
             'deliveryTime' => $request->deliveryTime,
             'delivery_date' => $request->delivery_date,
             'quantity' => count(cart()->items()),
@@ -143,6 +144,8 @@ class OrderController extends Controller
     {
         $order->status = 'Canceled';
         $order->save();
-        return back()->with('success', 'order Cancelled');
+
+        Stripe::refunds()->create($order->charge_id, $order->billing_total, ['reason' => 'requested_by_customer']);
+        return back()->with('success', 'Order Cancelled and the refund will be transferred to you');
     }
 }

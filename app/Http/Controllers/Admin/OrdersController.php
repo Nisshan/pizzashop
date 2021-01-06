@@ -27,7 +27,6 @@ class OrdersController extends Controller
 
     public function changeStatus(Request $request)
     {
-
         $order = Order::findOrFail($request->order_id);
         $order->update(['status' => $request->status]);
         Session::flash('success', 'Status changed');

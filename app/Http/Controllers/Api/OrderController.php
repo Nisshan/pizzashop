@@ -43,7 +43,7 @@ class OrderController extends Controller
         $newSubTotal = cart()->getSubtotal() - $discount;
 
         try {
-            Stripe::charges()->create([
+            $stripe = Stripe::charges()->create([
                 'amount' => $newSubTotal + cart()->tax(),
                 'currency' => 'USD',
                 'source' => $request->stripeToken,
@@ -51,7 +51,7 @@ class OrderController extends Controller
                 'receipt_email' => $request->email,
             ]);
 
-            $this->addToOrdersTables($request, null);
+            $this->addToOrdersTables($request, null, $stripe);
 
             cart()->clear();
             if (auth()->check()) {
@@ -64,14 +64,14 @@ class OrderController extends Controller
                 'message' => 'success', 'Thank you! Your order has been successfully placed'
             ]);
         } catch (CardErrorException $e) {
-            $this->addToOrdersTables($request, $e->getMessage());
+            $this->addToOrdersTables($request, $e->getMessage(), null);
             return response()->json([
                 'error' => $e->getMessage()
             ]);
         }
     }
 
-    protected function addToOrdersTables($request, $error)
+    protected function addToOrdersTables($request, $error, $stripe)
     {
 
         cart()->setUser(auth()->id());
@@ -88,6 +88,7 @@ class OrderController extends Controller
             'billing_name' => $request->name,
             'billing_address' => $request->address,
             'billing_city' => $request->city,
+            'charge_id' => $stripe['id'],
             'billing_province' => $request->province,
             'billing_postalcode' => $request->postalcode,
             'billing_phone' => $request->phone,
@@ -120,11 +121,24 @@ class OrderController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $order = Order::findOrFail($request->id);
+
+        $order = Order::findOrFail($request->order_id);
+        if (auth()->user()->isUser()) {
+            if ($request->status != 'Canceled') {
+                return response()->json([
+                    'message' => 'User Can only change status to Canceled'
+                ]);
+            }
+        }
+        if (in_array($order->status, ['Canceled', 'Delivered'])) {
+            return response()->json([
+                'message' => 'Cannot change status of Canceled or Delivered Order'
+            ]);
+        }
         $order->status = $request->status;
         $order->save();
         return response()->json([
-           'message' => 'Status Changed'
+            'message' => 'Status Changed'
         ]);
     }
 }

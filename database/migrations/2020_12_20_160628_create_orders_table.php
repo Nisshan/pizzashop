@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->unsignedBigInteger('quantity');
             $table->dateTime('delivered_at')->nullable();
+            $table->string('charge_id')->nullable();
             $table->string('status');
             $table->string('billing_email')->nullable();
             $table->string('billing_name')->nullable();
@@ -27,11 +28,11 @@ class CreateOrdersTable extends Migration
             $table->string('billing_postalcode')->nullable();
             $table->string('billing_phone')->nullable();
             $table->string('billing_name_on_card')->nullable();
-            $table->integer('billing_discount')->default(0);
+            $table->string('billing_discount')->default(0);
             $table->string('billing_discount_code')->nullable();
-            $table->integer('billing_subtotal')->nullable();
-            $table->integer('billing_tax')->nullable();
-            $table->integer('billing_total')->nullable();
+            $table->string('billing_subtotal')->nullable();
+            $table->string('billing_tax')->nullable();
+            $table->string('billing_total')->nullable();
             $table->string('service_type')->nullable();
             $table->string('street_address')->nullable();
             $table->string('optional')->nullable();

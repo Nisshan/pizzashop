@@ -43,6 +43,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/apply/coupon', [CouponController::class, 'apply']);
     Route::post('/remove/coupon',[CouponController::class,'remove']);
     Route::post('/order/create', [OrderController::class,'store']);
+    Route::post('/order/changeStatus',[OrderController::class,'changeStatus']);
 });
 
 Route::get('/{product}', [HomeController::class, 'single']);
