@@ -15,6 +15,16 @@
                 </button>
             </div>
         @endif
+
+        @if(session()->has('error'))
+            <div
+                class="alert alert-danger alert-dismissible fade show border-0 border-3 border-start border-danger position-fixed bottom-0 end-0"
+                role="alert" data-bs-autohide="true">
+                {{ session()->get('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+            </div>
+        @endif
         <div class="row">
             <h5 class="text-center py-3">Shopping Cart</h5>
             <div class="col-12">

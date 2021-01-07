@@ -25,9 +25,18 @@ class CouponController extends Controller
                 'message' => 'Coupon Already Applied, cannot apply more than one coupon at a time'
             ]);
         }
+
+        $discount = $coupon->discount(cart()->getSubtotal());
+
+        if ($discount > cart()->getSubtotal()) {
+             return response()->json([
+                 'message' => 'Sorry cannot add this coupon, Discount Amount is more than payable amount'
+             ]);
+        }
+
         auth()->user()->coupon()->create([
             'name' => $coupon->code,
-            'discount' => $coupon->discount(cart()->getSubtotal())
+            'discount' => $discount
         ]);
         return response()->json([
             'coupon' => auth()->user()->coupon()->first(),

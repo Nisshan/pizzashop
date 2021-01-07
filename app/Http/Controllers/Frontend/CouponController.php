@@ -14,11 +14,15 @@ class CouponController extends Controller
         $coupon = Coupon::where('code', $request->coupon)->first();
 
         if (!$coupon) {
-            return redirect()->route('checkout')->with('error', 'Coupon Not Found, Please Try with different one');
+            return redirect()->route('cart.view')->with('error', 'Coupon Not Found, Please Try with different one');
         }
+
 
         $discount = $coupon->discount(cart()->getSubtotal());
 
+        if ($discount > cart()->getSubtotal()) {
+            return redirect()->route('cart.view')->with('error', 'Sorry cannot add this coupon, Discount Amount is more than payable amount');
+        }
 
         if (auth()->check()) {
             auth()->user()->coupon()->create([
