@@ -49,10 +49,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->attributes['name'] = ucwords($name);
     }
 
-    public function setPasswordAttribute($password)
-    {
-        return $this->attributes['password'] = bcrypt($password);
-    }
+//    public function setPasswordAttribute($password)
+//    {
+//        return $this->attributes['password'] = bcrypt($password);
+//    }
 
     public function roleName()
     {

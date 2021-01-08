@@ -35,7 +35,7 @@ class UsersController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
             'role' => $request->role,
             'email_verified_at' => now()
         ]);
@@ -67,7 +67,7 @@ class UsersController extends Controller
 
         $user->name = $request->name;
         if (isset($request->password)) {
-            $user->password = $request->password;
+            $user->password = bcrypt($request->password);
         }
         if (auth()->user()->isAdmin()) {
             $user->status = $request->is_active;

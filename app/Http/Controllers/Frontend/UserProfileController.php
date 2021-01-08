@@ -34,7 +34,7 @@ class UserProfileController extends Controller
             return back()->with('danger', 'Current Password didnt match');
         } else {
             auth()->user()->update([
-                'password' => $request->password
+                'password' => bcrypt($request->password)
             ]);
             return back()->with('success', 'password changed');
         }

@@ -6,16 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2221aaab-bda4-44dd-bf2d-d9360ce6157f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/OrdersDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/OrdersDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Homecontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Homecontroller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/adminlte.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/adminlte.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/cart_manager.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/cart_manager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/OrderFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/OrderFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/pages/checkout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/pages/checkout.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,7 +256,7 @@
       <workItem from="1610026523746" duration="15499000" />
       <workItem from="1610079175728" duration="21000" />
       <workItem from="1610104752803" duration="91000" />
-      <workItem from="1610118086200" duration="2734000" />
+      <workItem from="1610118086200" duration="3417000" />
     </task>
     <servers />
   </component>
