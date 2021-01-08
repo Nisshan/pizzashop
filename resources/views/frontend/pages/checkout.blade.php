@@ -62,17 +62,22 @@
                 <!-- Contact Details -->
                     <h5 class="my-3">Billing Details</h5>
 
-                    <div class="mb-3">
-                        <label for="emailAddress" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="emailAddress" placeholder="Email" required
-                               name="email" value="{{old('email')}}">
-                    </div>
+                    @if(auth()->check())
+                        <input type="text" name="name" value="{{auth()->user()->name}}" hidden>
+                        <input type="email" name="email" value="{{auth()->user()->email}}" hidden>
+                    @else
+                        <div class="mb-3">
+                            <label for="emailAddress" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="emailAddress" placeholder="Email" required
+                                   name="email" value="{{old('email')}}">
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Name" required
-                               name="{{old('name')}}">
-                    </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Name" required
+                                   name="{{old('name')}}">
+                        </div>
+                    @endif
 
 
                     <div class="mb-3">
@@ -109,8 +114,24 @@
                         <h4 class="col-md-4 col-form-label font-large fw-bold">
                             Service Type
                         </h4>
+
+
+{{--                        <div class="col-md-8">--}}
+{{--                            <div class="form-group ">--}}
+{{--                                @foreach($delivery_types as $type)--}}
+{{--                                    <div class="form-check col-md-4">--}}
+{{--                                        <label class="form-check-label" for="{{$type->slug}}">--}}
+{{--                                            <input class="form-check-input togglerHide" type="radio" name="delivery_type"--}}
+{{--                                                   id="{{$type->slug}}" value="{{$type->slug}}"/>--}}
+{{--                                            <span> {{$type->delivery_type}} </span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                @endforeach--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
                         <div class="col-md-8">
-                            <div class="form-group row">
+                            <div class="form-group ">
                                 <div class="form-check col-md-4">
                                     <label class="form-check-label" for="pickup">
                                         <input class="form-check-input togglerHide" type="radio" name="serviceType"

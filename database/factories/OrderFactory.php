@@ -24,7 +24,7 @@ class OrderFactory extends Factory
     {
         return [
             'quantity' => rand(1,5),
-            'status' => $this->faker->randomElement(['In review','Pending','Canceled','Delivered'])
+            'status' => $this->faker->randomElement(['InReview','Pending','Canceled','Delivered'])
         ];
     }
 }

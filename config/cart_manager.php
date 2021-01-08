@@ -15,7 +15,7 @@ return [
 
     // Tax amount is applied on net total (subtotal - discount + shipping charges)
     // subtotal, tax, net total and total are rounded to 2 decimals
-    'tax_percentage' => 13,
+    'tax_percentage' => 0,
 
     // Round off the total amount (net total + tax) to nearest (0 or 0.05 or 0.1 or 0.5 or 1)
     // Total amount is rounded off accordingly to come up the payable amount by the customer

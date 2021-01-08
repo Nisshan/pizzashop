@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderCanceled;
+use App\Mail\OrderPlaced;
+use App\Models\Delivery;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use Cartalyst\Stripe\Exception\CardErrorException;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Mail;
 
 
 class OrderController extends Controller
@@ -30,7 +32,6 @@ class OrderController extends Controller
             }
         }
 
-
         cart()->refreshAllItemsData();
 
         $discount = session()->get('coupon')['discount'] ?? 0;
@@ -45,7 +46,8 @@ class OrderController extends Controller
             'count' => count(cart()->items()),
             'discount' => $discount,
             'newSubTotal' => $newSubTotal,
-            'payable' => $newSubTotal + cart()->tax()
+            'payable' => $newSubTotal + cart()->tax(),
+            'delivery_types' => Delivery::where('status', 1)->get()
         ]);
     }
 
@@ -69,7 +71,8 @@ class OrderController extends Controller
                 ],
             ]);
 
-            $this->addToOrdersTables($request, null, $stripe);
+            $order = $this->addToOrdersTables($request, null, $stripe);
+            Mail::send(new OrderPlaced($order));
 
             cart()->clear();
             session()->forget('coupon');
@@ -148,6 +151,7 @@ class OrderController extends Controller
         $order->save();
 
         Stripe::refunds()->create($order->charge_id, $order->billing_total, ['reason' => 'requested_by_customer']);
+        Mail::send(new OrderCanceled($order));
         return back()->with('success', 'Order Cancelled and the refund will be transferred to you');
     }
 }

@@ -119,6 +119,10 @@ class OrdersDatatable extends DataTable
             ];
         } else {
             return [
+                Column::make('id')
+                    ->title('Order ID')
+                    ->orderable(true)
+                    ->searchable(true),
                 'quantity',
                 'status',
                 Column::computed('action')

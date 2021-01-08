@@ -269,7 +269,7 @@ return [
                 [
                     'text' => 'Menu Builder',
                     'icon' => 'fa fa-list',
-                    'url' => 'menu',
+                    'url' => 'admin/menu',
                 ],
             ]
 
@@ -323,6 +323,30 @@ return [
                     'can' => 'manage_menu',
                 ],
             ]
+
+
+
+        ],
+
+        [
+            'text' => 'Delivery',
+            'icon' => 'fas fa-tags',
+            'submenu' => [
+                [
+                    'text' => 'Manage',
+                    'url' => 'admin/deliveries',
+                    'icon' => 'fas fa-cogs',
+
+                ],
+                [
+                    'text' => 'Create',
+                    'url' => 'admin/deliveries/create',
+                    'icon' => 'fa fa-plus-circle',
+                    'can' => 'manage_menu',
+                ],
+            ]
+
+
 
         ],
 
