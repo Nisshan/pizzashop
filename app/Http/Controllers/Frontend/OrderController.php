@@ -40,13 +40,11 @@ class OrderController extends Controller
 
         return view('frontend.pages.checkout', [
             'items' => cart()->items(),
-//            'tax' => cart()->tax(),
             'transaction' => cart()->totals(),
             'subtotal' => cart()->getSubtotal(),
             'count' => count(cart()->items()),
             'discount' => $discount,
-//            'newSubTotal' => $newSubTotal,
-            'payable' => $newSubTotal ,
+            'payable' => $newSubTotal,
             'delivery_types' => Delivery::where('status', 1)->get()
         ]);
     }
@@ -54,6 +52,8 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        cart()->refreshAllItemsData();
+        $delivery_price = $this->calculateDeliveryCharge($request->delivery_type);
 
         $discount = session()->get('coupon')['discount'] ?? 0;
 
@@ -61,13 +61,13 @@ class OrderController extends Controller
 
         try {
             $stripe = Stripe::charges()->create([
-                'amount' => $newSubTotal ,
+                'amount' => $newSubTotal + $delivery_price,
                 'currency' => 'USD',
                 'source' => $request->stripeToken,
                 'description' => 'Order',
                 'receipt_email' => $request->email,
                 'metadata' => [
-                    'text' => 'something'
+                    'delivery_price' => $delivery_price
                 ],
             ]);
 
@@ -93,6 +93,8 @@ class OrderController extends Controller
     protected function addToOrdersTables($request, $error, $stripe)
     {
 
+        $delivery_price = $this->calculateDeliveryCharge($request->delivery_type);
+
         $discount = session()->get('coupon')['discount'] ?? 0;
 
         $newSubTotal = cart()->getSubtotal() - $discount;
@@ -110,12 +112,11 @@ class OrderController extends Controller
             'billing_phone' => $request->phone,
             'billing_name_on_card' => $request->name_on_card,
             'billing_discount' => $discount,
-            'billing_total' => $newSubTotal ,
+            'billing_discount_code' => session()->get('coupon')['name'] ?? " ",
+            'billing_total' => $newSubTotal,
             'error' => $error,
-            'service_type' => $request->serviceType,
-            'street_address' => $request->street_address,
-            'optional' => $request->optional,
-            'note' => $request->note,
+            'delivery_type' => $request->serviceType,
+            'delivery_charge' => $delivery_price,
             'deliveryTime' => $request->deliveryTime,
             'delivery_date' => $request->delivery_date,
             'quantity' => count(cart()->items()),
@@ -151,5 +152,15 @@ class OrderController extends Controller
         Stripe::refunds()->create($order->charge_id, $order->billing_total, ['reason' => 'requested_by_customer']);
         Mail::send(new OrderCanceled($order));
         return back()->with('success', 'Order Cancelled and the refund will be transferred to you');
+    }
+
+
+    private function calculateDeliveryCharge($delivery_type)
+    {
+        if ($delivery_type !== 'self-pickup') {
+            return Delivery::where('slug', $delivery_type)->first()->price;
+        } else {
+            return 0;
+        }
     }
 }

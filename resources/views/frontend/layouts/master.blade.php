@@ -19,7 +19,12 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{{asset('frontend/navscroller/nav.css')}}"/>
     <link rel='stylesheet' type='text/css' media='screen' href="{{asset('frontend/css/main.css')}}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-@yield('css')
+    <style>
+        .form-required {
+            color: red;
+        }
+    </style>
+    @yield('css')
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#main-nav" data-bs-offset="400">

@@ -67,107 +67,73 @@
                         <input type="email" name="email" value="{{auth()->user()->email}}" hidden>
                     @else
                         <div class="mb-3">
-                            <label for="emailAddress" class="form-label">Email address</label>
+                            <label for="emailAddress" class="form-label">Email address <span class="form-required">*</span></label>
                             <input type="email" class="form-control" id="emailAddress" placeholder="Email" required
                                    name="email" value="{{old('email')}}">
                         </div>
 
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
+                            <label for="name" class="form-label">Name <span class="form-required">*</span></label>
                             <input type="text" class="form-control" id="name" placeholder="Name" required
                                    name="{{old('name')}}">
                         </div>
                     @endif
-
-
                     <div class="mb-3">
-                        <label for="address" class="form-label">Address</label>
+                        <label for="address" class="form-label">Address <span class="form-required">*</span></label>
                         <input type="text" class="form-control" id="address" placeholder="Address" name="address"
                                required value="{{old('address')}}">
                     </div>
 
                     <div class="row g-2">
                         <div class="col-12 col-md mb-3">
-                            <label for="city" class="form-label">City</label>
+                            <label for="city" class="form-label">City <span class="form-required">*</span></label>
                             <input type="text" class="form-control" id="city" placeholder="city" name="city" required
                                    value="{{old('city')}}">
                         </div>
                         <div class="col-12 col-md mb-3">
-                            <label for="province" class="form-label">Province</label>
+                            <label for="province" class="form-label">Province <span class="form-required">*</span></label>
                             <input type="text" class="form-control" id="province" placeholder="Province" name="province"
                                    required value="{{old('province')}}">
                         </div>
                     </div>
                     <div class="row g-2 border-bottom">
                         <div class="col-12 col-md mb-3">
-                            <label for="postalcode" class="form-label">Postal Code</label>
+                            <label for="postalcode" class="form-label">Postal Code <span class="form-required">*</span></label>
                             <input type="number" class="form-control" id="postalcode" placeholder="Postal Code"
                                    name="postalcode" required value="{{old('postalcode')}}">
                         </div>
                         <div class="col-12 col-md mb-3">
-                            <label for="phone" class="form-label">Phone</label>
+                            <label for="phone" class="form-label">Phone <span class="form-required">*</span></label>
                             <input type="text" class="form-control" id="phone" placeholder="phone" required
                                    name="phone" value="{{old('phone')}}">
                         </div>
                     </div>
                     <div class="form-group row border-bottom pb-4 mb-3">
                         <h4 class="col-md-4 col-form-label font-large fw-bold">
-                            Service Type
+                            Delivery Type
                         </h4>
-
-
-{{--                        <div class="col-md-8">--}}
-{{--                            <div class="form-group ">--}}
-{{--                                @foreach($delivery_types as $type)--}}
-{{--                                    <div class="form-check col-md-4">--}}
-{{--                                        <label class="form-check-label" for="{{$type->slug}}">--}}
-{{--                                            <input class="form-check-input togglerHide" type="radio" name="delivery_type"--}}
-{{--                                                   id="{{$type->slug}}" value="{{$type->slug}}"/>--}}
-{{--                                            <span> {{$type->delivery_type}} </span>--}}
-{{--                                        </label>--}}
-{{--                                    </div>--}}
-{{--                                @endforeach--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
                         <div class="col-md-8">
                             <div class="form-group ">
                                 <div class="form-check col-md-4">
-                                    <label class="form-check-label" for="pickup">
-                                        <input class="form-check-input togglerHide" type="radio" name="serviceType"
-                                               id="pickup" value="pickup" data-toShow="pickup" data-toHide="delivery"
-                                               data-id="#pickup" checked/>
-                                        <span> Pickup </span>
+                                    <label class="form-check-label" for="self-pickup">
+                                        <input class="form-check-input" type="radio" name="delivery_type"
+                                               id="self-pickup" value="self-pickup" checked/>
+                                        <span> Self Pickup </span>
                                     </label>
                                 </div>
-                                <div class="form-check col-md-4">
-                                    <label class="form-check-label" for="delivery">
-                                        <input class="form-check-input togglerHide" type="radio" name="serviceType"
-                                               id="delivery" value="delivery" data-toShow="delivery"
-                                               data-toHide="pickup"
-                                               data-id="#delivery"/>
-                                        <span> Delivery</span>
-                                    </label>
-                                </div>
-                                <!-- Delevery Option -->
-                                <div class="delivery my-3 d-none">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Enter Your Street Address"
-                                               aria-label="Your Street Address" name="street_address"
-                                               value="{{old('street_address')}}"/>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md mb-3 mb-md-0">
-                                            <input type="text" class="form-control" placeholder="Optional"
-                                                   name="optional" value="{{old('optional')}}"/>
+
+                                @if(isset($delivery_types))
+                                    @foreach($delivery_types as $type)
+                                        <div class="form-check col-md-8">
+                                            <label class="form-check-label" for="{{$type->slug}}">
+                                                <input class="form-check-input togglerHide" type="radio"
+                                                       name="delivery_type"
+                                                       id="{{$type->slug}}" value="{{$type->slug}}"/>
+                                                <span> {{$type->delivery_type}} {{$type->chargeable ? "Delivery Charge: ".$type->price : ''}}</span>
+                                            </label>
                                         </div>
-                                        <div class="col-12 col-md">
-                                            <input type="text" class="form-control"
-                                                   placeholder="Notes, Instruction, etc"
-                                                   name="note" value="{{old('note')}}"/>
-                                        </div>
-                                    </div>
-                                </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -207,7 +173,7 @@
                     <div class="row g-2 mt-3">
                         <h5>Payment Details</h5>
                         <div class="mb-3">
-                            <label for="name_on_card" class="form-label">Name on Card</label>
+                            <label for="name_on_card" class="form-label">Name on Card <span class="form-required">*</span></label>
                             <input type="text" class="form-control" id="name_on_card" name="name_on_card"
                                    placeholder="Name On Card" value="{{old('name_on_card')}}">
                         </div>
@@ -274,15 +240,16 @@
                                 </div>
                             @endif
 
-{{--                            <div class="d-flex justify-content-between">--}}
-{{--                                <p class="font-medium mb-2">Tax</p>--}}
-{{--                                <p class="font-medium mb-2">{{$transaction['Tax']}}</p>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="d-flex justify-content-between">--}}
+                            {{--                                <p class="font-medium mb-2">Tax</p>--}}
+                            {{--                                <p class="font-medium mb-2">{{$transaction['Tax']}}</p>--}}
+                            {{--                            </div>--}}
                             <hr class="my-2">
                             <div class="d-flex justify-content-between border-bottom">
                                 <p class="font-medium mb-2">Payable</p>
                                 <p class="font-medium mb-2">${{$payable}}</p>
                             </div>
+                            <span class="form-required">Delivery charge based on delivery option will be charged</span>
                         </div>
                     </div>
                 </div>

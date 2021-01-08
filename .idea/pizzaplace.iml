@@ -135,6 +135,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/freshbitsweb/laravel-cart-manager" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cartalyst/stripe" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cartalyst/stripe-laravel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ezyang/htmlpurifier" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

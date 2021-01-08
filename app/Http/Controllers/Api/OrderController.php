@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Delivery;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use Cartalyst\Stripe\Exception\CardErrorException;
@@ -25,8 +26,8 @@ class OrderController extends Controller
             'count' => count(cart()->items()),
             'discount' => \cart()->getDiscount(),
             'newSubTotal' => \cart()->getSubtotal(),
-            'payable' => \cart()->getSubtotal() - cart()->getDiscount()
-
+            'payable' => \cart()->getSubtotal() - cart()->getDiscount(),
+            'delivery_types' => Delivery::where('status', 1)->get()
         ]);
     }
 
@@ -36,6 +37,8 @@ class OrderController extends Controller
         cart()->setUser(auth()->id());
         cart()->refreshAllItemsData();
 
+        $delivery_price = $this->calculateDeliveryCharge($request->delivery_type);
+
         $discount = 0;
         if (auth()->user()->coupon()->count()) {
             $discount = auth()->user()->coupon()->discount;
@@ -44,7 +47,7 @@ class OrderController extends Controller
 
         try {
             $stripe = Stripe::charges()->create([
-                'amount' => $newSubTotal,
+                'amount' => $newSubTotal + $delivery_price,
                 'currency' => 'USD',
                 'source' => $request->stripeToken,
                 'description' => 'Order',
@@ -76,6 +79,8 @@ class OrderController extends Controller
 
         cart()->setUser(auth()->id());
 
+        $delivery_price = $this->calculateDeliveryCharge($request->delivery_type);
+
         $discount = 0;
         if (auth()->user()->coupon()->count()) {
             $discount = auth()->user()->coupon()->discount;
@@ -94,18 +99,16 @@ class OrderController extends Controller
             'billing_phone' => $request->phone,
             'billing_name_on_card' => $request->name_on_card,
             'billing_discount' => $discount,
+            'billing_discount_code' => session()->get('coupon')['name'] ?? " ",
             'billing_total' => $newSubTotal,
             'error' => $error,
-            'service_type' => $request->serviceType,
-            'street_address' => $request->street_address,
-            'optional' => $request->optional,
-            'note' => $request->note,
+            'delivery_type' => $request->serviceType,
+            'delivery_charge' => $delivery_price,
             'deliveryTime' => $request->deliveryTime,
             'delivery_date' => $request->delivery_date,
             'quantity' => count(cart()->items()),
             'status' => 'InReview'
         ]);
-
         // Insert into order_product table
         foreach (cart()->items() as $item) {
             OrderProduct::create([
@@ -138,5 +141,14 @@ class OrderController extends Controller
         return response()->json([
             'message' => 'Status Changed'
         ]);
+    }
+
+    private function calculateDeliveryCharge($delivery_type)
+    {
+        if ($delivery_type !== 'self-pickup') {
+            return Delivery::where('slug', $delivery_type)->first()->price;
+        } else {
+            return 0;
+        }
     }
 }

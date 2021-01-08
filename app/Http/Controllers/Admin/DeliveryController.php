@@ -33,7 +33,7 @@ class DeliveryController extends Controller
             'delivery_type' => $request->delivery_type,
             'chargeable' => $request->chargeable,
             'status' => 1,
-            'price' => $request->price,
+            'price' => isset($request->price) ? $request->price : 0,
         ]);
 
         return redirect()->route('deliveries.index')->with('success', 'Delivery Type created success');
@@ -58,13 +58,19 @@ class DeliveryController extends Controller
 
     public function update(Request $request, Delivery $delivery)
     {
-        $validated =$request->validate([
+        $request->validate([
             'delivery_type' => ['required', 'unique:deliveries,delivery_type,'.$delivery->id],
             'chargeable' => ['required'],
-            'price' => ['nullable', 'numeric']
+            'price' => ['nullable', 'numeric'],
+            'status' => ['required']
         ]);
 
-        $delivery->update($validated);
+        $delivery->update([
+            'delivery_type' => $request->delivery_type,
+            'chargeable' => $request->chargeable,
+            'price' => isset($request->price) ? $request->price : 0,
+            'status' => $request->status
+        ]);
 
         return redirect()->route('deliveries.index')->with('success', 'Delivery updated success');
     }
