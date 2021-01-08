@@ -272,17 +272,12 @@
 
                                     <p class="font-medium mb-2">-${{$discount}}</p>
                                 </div>
-                                <hr class="my-2">
-                                <div class="d-flex justify-content-between">
-                                    <p class="font-medium mb-2">Sub Total </p>
-                                    <p class="font-medium mb-2">${{$newSubTotal}}</p>
-                                </div>
                             @endif
 
-                            <div class="d-flex justify-content-between">
-                                <p class="font-medium mb-2">Tax</p>
-                                <p class="font-medium mb-2">{{$transaction['Tax']}}</p>
-                            </div>
+{{--                            <div class="d-flex justify-content-between">--}}
+{{--                                <p class="font-medium mb-2">Tax</p>--}}
+{{--                                <p class="font-medium mb-2">{{$transaction['Tax']}}</p>--}}
+{{--                            </div>--}}
                             <hr class="my-2">
                             <div class="d-flex justify-content-between border-bottom">
                                 <p class="font-medium mb-2">Payable</p>

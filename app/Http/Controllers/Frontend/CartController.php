@@ -35,14 +35,12 @@ class CartController extends Controller
 
         return view('frontend.pages.cart', [
             'items' => cart()->items(),
-            'tax' => cart()->tax(),
             'transaction' => cart()->totals(),
             'subtotal' => cart()->getSubtotal(),
             'count' => count(cart()->items()),
             'discount' => $discount,
-            'newSubTotal' => $newSubTotal,
             'deliveryCharge' => cart()->getShippingCharges(),
-            'payable' => $newSubTotal + cart()->tax()
+            'payable' => $newSubTotal
         ]);
     }
 

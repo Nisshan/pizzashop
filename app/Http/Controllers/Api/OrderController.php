@@ -24,8 +24,8 @@ class OrderController extends Controller
             'subtotal' => cart()->getSubtotal(),
             'count' => count(cart()->items()),
             'discount' => \cart()->getDiscount(),
-            'newSubTotal' => \cart()->getSubtotal() - cart()->getDiscount(),
-            'payable' => \cart()->getSubtotal() - cart()->getDiscount() + cart()->tax()
+            'newSubTotal' => \cart()->getSubtotal(),
+            'payable' => \cart()->getSubtotal() - cart()->getDiscount()
 
         ]);
     }
@@ -44,7 +44,7 @@ class OrderController extends Controller
 
         try {
             $stripe = Stripe::charges()->create([
-                'amount' => $newSubTotal + cart()->tax(),
+                'amount' => $newSubTotal,
                 'currency' => 'USD',
                 'source' => $request->stripeToken,
                 'description' => 'Order',
@@ -94,9 +94,7 @@ class OrderController extends Controller
             'billing_phone' => $request->phone,
             'billing_name_on_card' => $request->name_on_card,
             'billing_discount' => $discount,
-            'billing_subtotal' => $newSubTotal,
-            'billing_tax' => cart()->tax(),
-            'billing_total' => $newSubTotal + cart()->tax(),
+            'billing_total' => $newSubTotal,
             'error' => $error,
             'service_type' => $request->serviceType,
             'street_address' => $request->street_address,

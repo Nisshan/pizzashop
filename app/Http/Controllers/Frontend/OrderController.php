@@ -40,13 +40,13 @@ class OrderController extends Controller
 
         return view('frontend.pages.checkout', [
             'items' => cart()->items(),
-            'tax' => cart()->tax(),
+//            'tax' => cart()->tax(),
             'transaction' => cart()->totals(),
             'subtotal' => cart()->getSubtotal(),
             'count' => count(cart()->items()),
             'discount' => $discount,
-            'newSubTotal' => $newSubTotal,
-            'payable' => $newSubTotal + cart()->tax(),
+//            'newSubTotal' => $newSubTotal,
+            'payable' => $newSubTotal ,
             'delivery_types' => Delivery::where('status', 1)->get()
         ]);
     }
@@ -61,7 +61,7 @@ class OrderController extends Controller
 
         try {
             $stripe = Stripe::charges()->create([
-                'amount' => $newSubTotal + cart()->tax(),
+                'amount' => $newSubTotal ,
                 'currency' => 'USD',
                 'source' => $request->stripeToken,
                 'description' => 'Order',
@@ -110,9 +110,7 @@ class OrderController extends Controller
             'billing_phone' => $request->phone,
             'billing_name_on_card' => $request->name_on_card,
             'billing_discount' => $discount,
-            'billing_subtotal' => $newSubTotal,
-            'billing_tax' => cart()->tax(),
-            'billing_total' => $newSubTotal + cart()->tax(),
+            'billing_total' => $newSubTotal ,
             'error' => $error,
             'service_type' => $request->serviceType,
             'street_address' => $request->street_address,

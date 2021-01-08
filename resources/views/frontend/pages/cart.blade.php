@@ -111,10 +111,10 @@
                         <p class="flex-grow-1 fw-bold mb-1">Total</p>
                         <p class="flex-shrink-1 mb-1"> {{$transaction['Subtotal']}}</p>
                     </div>
-                    <div class="col-6 d-flex ms-auto">
-                        <p class="flex-grow-1 fw-bold mb-1">TAX(13%)</p>
-                        <p class="flex-shrink-1 mb-1"> {{$transaction['Tax']}}</p>
-                    </div>
+{{--                    <div class="col-6 d-flex ms-auto">--}}
+{{--                        <p class="flex-grow-1 fw-bold mb-1">TAX(13%)</p>--}}
+{{--                        <p class="flex-shrink-1 mb-1"> {{$transaction['Tax']}}</p>--}}
+{{--                    </div>--}}
                     @if(session()->get('coupon'))
                         <div class="col-6 ms-auto mb-3">
                             <form action="{{route('coupon.delete')}}" class="d-flex ">
@@ -128,12 +128,8 @@
                                 <p class="font-medium mb-2">-${{$discount}}</p>
                             </form>
                         </div>
-                        <hr class="my-2">
-                        <div class="col-6 d-flex ms-auto">
-                            <p class="flex-grow-1 fw-bold mb-1">Sub Total </p>
-                            <p class="flex-shrink-1 mb-1">${{$newSubTotal}}</p>
-                        </div>
                     @endif
+                    <hr class="my-2">
                     <div class="col-6 d-flex ms-auto">
                         <p class="flex-grow-1 fw-bold mb-1">Payable</p>
                         <p class="flex-shrink-1 mb-1">${{$payable}}</p>
