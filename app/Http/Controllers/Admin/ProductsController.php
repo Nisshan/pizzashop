@@ -31,6 +31,7 @@ class ProductsController extends Controller
 
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
+       
         $request->validate([
             'name' => ['required', 'min:5', 'max:256'],
             'description' => ['required', 'max:500'],
@@ -52,7 +53,7 @@ class ProductsController extends Controller
             'price' => $request->price,
             'amount_off' => $request->amount_off,
             'percent_off' => $request->percent_off,
-            'offer_type' => $request->offer_type,
+            'offer_type' => isset($request->offer_type) ? $request->offer_type : 0,
             'has_offer' => $request->has_offer
         ]);
 
