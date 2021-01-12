@@ -17,16 +17,32 @@ class OrderController extends Controller
     public function index()
     {
         cart()->setUser(auth()->id());
+
+        if (count(cart()->items()) < 1) {
+            return response()->json(['message' => 'no items in the cart']);
+        }
+
+        $coupon = auth()->user()->coupon()->first();
+        if (isset($coupon)) {
+            session()->put('coupon', [
+                'name' => $coupon->name,
+                'discount' => $coupon->discount
+            ]);
+        }
+
+        cart()->refreshAllItemsData();
+
+        $discount = session()->get('coupon')['discount'] ?? 0;
+
+        $newSubTotal = cart()->getSubtotal() - $discount;
         cart()->refreshAllItemsData();
         return response()->json([
             'items' => cart()->items(),
-            'tax' => cart()->tax(),
             'transaction' => cart()->totals(),
             'subtotal' => cart()->getSubtotal(),
             'count' => count(cart()->items()),
-            'discount' => \cart()->getDiscount(),
-            'newSubTotal' => \cart()->getSubtotal(),
-            'payable' => \cart()->getSubtotal() - cart()->getDiscount(),
+            'discount' => $discount,
+            'payable' => $newSubTotal,
             'delivery_types' => Delivery::where('status', 1)->get()
         ]);
     }
@@ -140,6 +156,38 @@ class OrderController extends Controller
         $order->save();
         return response()->json([
             'message' => 'Status Changed'
+        ]);
+    }
+
+    public function getCartItems()
+    {
+        cart()->setUser(auth()->id());
+
+        if (count(cart()->items()) < 1) {
+            return response()->json(['message' => 'no items in the cart']);
+        }
+
+        $coupon = auth()->user()->coupon()->first();
+        if (isset($coupon)) {
+            session()->put('coupon', [
+                'name' => $coupon->name,
+                'discount' => $coupon->discount
+            ]);
+        }
+
+        cart()->refreshAllItemsData();
+
+        $discount = session()->get('coupon')['discount'] ?? 0;
+
+        $newSubTotal = cart()->getSubtotal() - $discount;
+
+        return response()->json([
+            'items' => cart()->items(),
+            'transaction' => cart()->totals(),
+            'subtotal' => cart()->getSubtotal(),
+            'count' => count(cart()->items()),
+            'discount' => $discount,
+            'payable' => $newSubTotal,
         ]);
     }
 

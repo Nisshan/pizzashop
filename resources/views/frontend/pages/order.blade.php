@@ -70,36 +70,24 @@
                             <th scope="row">Service Type</th>
                             <td>{{$order->service_type}}</td>
                         </tr>
-                        @if($order->service_type != 'pickup')
-                            <tr>
-                                <th scope="row">street_address</th>
-                                <td>{{$order->street_address}}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">optional</th>
-                                <td>{{$order->optional}}</td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row">Note</th>
-                                <td>{{$order->note}}</td>
-                            </tr>
-                        @endif
-
+                        
                         <tr>
                             <th scope="row">deliveryTime</th>
                             <td>{{$order->deliveryTime}}</td>
                         </tr>
-
+                        @if($order->deliveryTime != 'asap')
                         <tr>
                             <th scope="row">delivery_date</th>
                             <td>{{$order->delivery_date}}</td>
                         </tr>
+                        @endif
 
+                        @if($order->error)
                         <tr>
                             <th scope="row">Error</th>
-                            <td>{{isset($order->error) ? $order->error : 'No Error'}}</td>
+                            <td>{{ $order->error}}</td>
                         </tr>
+                        @endif
                         </tbody>
                     </table>
                 </div>
