@@ -49,7 +49,7 @@ class ProductsController extends Controller
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
-            'cover' => $this->uploadCoverImage($request->cover),
+            'cover' => isset($request->cover) ?? $this->uploadCoverImage($request->cover),
             'price' => $request->price,
             'amount_off' => $request->amount_off,
             'percent_off' => $request->percent_off,
