@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'PizzaShop',
+    'title' => 'Claude Pizza',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,12 +45,12 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>Claude</b>Pizza',
+    'logo_img' => 'images/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Pizzashop',
+    'logo_img_alt' => 'Claude Pizza',
 
     /*
     |--------------------------------------------------------------------------
@@ -188,7 +188,7 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => '/admin',
+    'dashboard_url' => '/admin/dashboard',
 
     'logout_url' => 'logout',
 
@@ -245,6 +245,28 @@ return [
                 [
                     'text' => 'Create',
                     'url' => 'admin/users/create',
+                    'icon' => 'fa fa-plus-circle',
+                    'can' => 'manage_menu',
+                ],
+            ]
+
+        ],
+
+        [
+            'text' => 'Sliders',
+            'icon' => 'fas fa-tags',
+            'can' => 'manage_menu',
+            'submenu' => [
+                [
+                    'text' => 'Manage',
+                    'url' => 'admin/sliders',
+                    'icon' => 'fas fa-cogs',
+                    'can' => 'manage_menu',
+
+                ],
+                [
+                    'text' => 'Create',
+                    'url' => 'admin/sliders/create',
                     'icon' => 'fa fa-plus-circle',
                     'can' => 'manage_menu',
                 ],
