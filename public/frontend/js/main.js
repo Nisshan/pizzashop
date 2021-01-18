@@ -12,8 +12,10 @@ $(".banner-carousel").owlCarousel({
     dots: false,
     animateIn: "fadeIn",
     animateOut: "fadeOut",
-    touchDrag: true,
-    mouseDrag: true,
+    freeDrag: false,
+    pullDrag: false,
+    touchDrag: false,
+    mouseDrag: false,
     navText: [
         '<i class="fa fa-angle-left" style="color:#000;font-size:2rem;"></i>',
         '<i class="fa fa-angle-right" style="color:#000;font-size:2rem"></i>',
