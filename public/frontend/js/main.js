@@ -3,6 +3,31 @@ alertList.forEach(function (alert) {
     new bootstrap.Alert(alert);
 });
 
+$(".banner-carousel").owlCarousel({
+    rtl: false,
+    loop: true,
+    margin: 10,
+    autoplay: true,
+    nav: true,
+    dots: false,
+    animateIn: "fadeIn",
+    animateOut: "fadeOut",
+    touchDrag: true,
+    mouseDrag: true,
+    navText: [
+        '<i class="fa fa-angle-left" style="color:#000;font-size:2rem;"></i>',
+        '<i class="fa fa-angle-right" style="color:#000;font-size:2rem"></i>',
+    ],
+    responsive: {
+        0: {
+            items: 1,
+        },
+    },
+});
+
+var image = document.getElementsByClassName("simple-parallax");
+new simpleParallax(image);
+
 var toastElList = [].slice.call(document.querySelectorAll(".toast"));
 var toastList = toastElList.map(function (toastEl) {
     return new bootstrap.Toast(toastEl);

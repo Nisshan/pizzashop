@@ -112,7 +112,7 @@ header .bg-light {
     display: block;
 }
 .logo-small {
-    height: 60px;
+    height: 50px;
     transition: height 0.3s;
 }
 .logo-large {
@@ -423,7 +423,62 @@ label input[type="radio"]:checked ~ span {
     border-top: 3px solid #ff0000;
 }
 
+/* Owl Carousel */
+
+.owl-carousel .owl-nav.disabled,
+.owl-carousel .owl-dots.disabled {
+    display: block;
+}
+
+.owl-nav button {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    top: 50%;
+    opacity: 1;
+    background-color: #fff !important;
+    border-radius: 50px;
+    transition: all 0.6s ease;
+}
+
+.owl-nav button:hover {
+    background-color: #333232 !important;
+}
+.owl-nav button i {
+    transition: all 0.6s ease;
+}
+
+.owl-nav button:hover i {
+    color: #fff !important;
+}
+
+.owl-prev {
+    left: 2rem;
+}
+
+.owl-next {
+    right: 2rem;
+}
+
+.banner-image {
+    height: 600px;
+}
+.owl-carousel .owl-item img {
+    height: 600px;
+    object-fit: cover;
+}
+
 @media only screen and (max-width: 768px) {
+    .owl-carousel .owl-item img {
+        height: 400px;
+    }
+    .banner-image {
+        height: 400px;
+    }
     footer {
         padding-bottom: 5rem;
     }
@@ -448,6 +503,15 @@ label input[type="radio"]:checked ~ span {
 
     .h-100v {
         height: auto;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .banner-image {
+        height: 300px;
+    }
+    .owl-carousel .owl-item img {
+        height: 300px;
     }
 }
 

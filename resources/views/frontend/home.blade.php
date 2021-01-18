@@ -65,6 +65,22 @@
 </div>
 @endif
 
+<section class="mt-2 pt-3 pt-lg-5 mt-lg-5">
+    <div class="owl-carousel owl-theme banner-carousel">
+        <div class="item banner-image position-relative">
+            <img src="https://picsum.photos/id/784/1900/1200" class="img-fluid simple-parallax" alt="..." />
+        </div>
+        <div class="item banner-image position-relative">
+            <img src="https://picsum.photos/1900/800" class="img-fluid simple-parallax" alt="..." />
+        </div>
+
+        <div class="item banner-image position-relative">
+            <img src="https://picsum.photos/1900/1000" class="img-fluid simple-parallax" alt="..." />
+        </div>
+    </div>
+</section>
+</section>
+
 @foreach($categories as $key => $category)
 <section class="container mt-2 @if($key == 0) pt-3 pt-lg-5 mt-lg-5 @endif" id="{{$category->slug}}">
     <div class="mb-4 pt-4">
