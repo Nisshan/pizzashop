@@ -71,19 +71,14 @@
         @if(count($sliders))
         @foreach($sliders as $slider)
         <div class="item banner-image cover" style="background-image: url({{$slider->path()}});">
+        </div>
+        @endforeach
+        @else
+        <div class="item banner-image position-relative">
+            <div class="item banner-image cover" style="background-image: url(./images/pizzaplace512.png);"></div>
+            @endif
 
         </div>
-        {{-- <div class="item banner-image position-relative">
-            <img src="{{$slider->path()}}" class="img-responsive simple-parallax" alt="..." />
-    </div> --}}
-    @endforeach
-    @else
-    <div class="item banner-image position-relative">
-        <img src="/images/pizzaplace512.png" class="img-fluid simple-parallax" alt="..." />
-    </div>
-    @endif
-
-    </div>
 </section>
 
 
