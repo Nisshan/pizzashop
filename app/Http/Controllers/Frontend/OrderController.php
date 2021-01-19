@@ -120,7 +120,7 @@ class OrderController extends Controller
             'deliveryTime' => $request->deliveryTime,
             'delivery_date' => $request->delivery_date,
             'quantity' => count(cart()->items()),
-            'status' => 'InReview'
+            'status' => 'Order-Received'
 
         ]);
 
@@ -163,4 +163,6 @@ class OrderController extends Controller
             return 0;
         }
     }
+
+
 }

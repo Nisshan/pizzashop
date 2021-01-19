@@ -55,11 +55,18 @@ class OrdersDatatable extends DataTable
                     return '<span class="btn ' . config('deliverystatus.status.' . $query->status) . '">' . $query->status . '</span>';
                 } else {
                     return '<button type="button" class="btn ' . config('deliverystatus.status.' . $query->status) . ' change-status" data-toggle="modal" data-target="#exampleModal"  data-id=' . $query->id . ' data-status=' . $query->status . '>
-                        ' . $query->status . '
+                        ' . str_replace('-','',$query->status ) . '
                         </button>';
                 }
 
-            })->rawColumns(['status', 'action']);
+            })
+            ->editColumn('priority', function ($query) {
+
+                return '<button type="button" class="btn  btn-primary change-priority" data-toggle="modal" data-target="#priorityModal"  data-id=' . $query->id . ' data-status=' . $query->priority . '>
+                        ' . config('deliverystatus.priority.' . $query->priority). '
+                        </button>';
+
+            })->rawColumns(['status', 'action','priority']);
     }
 
     /**
@@ -112,6 +119,7 @@ class OrdersDatatable extends DataTable
                     ->orderable(true)
                     ->searchable(true),
                 'status',
+                'priority',
                 Column::computed('action')
                     ->exportable(false)
                     ->printable(false)

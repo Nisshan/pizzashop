@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('coupons', App\Http\Controllers\Admin\CouponController::class);
         Route::resource('deliveries', DeliveryController::class);
         Route::post('/orders/changeStatus', [OrdersController::class, 'changeStatus'])->name('changeStatus');
+        Route::post('/orders/changePriority', [OrdersController::class, 'changePriority'])->name('changePriority');
         Route::get('menu', [CategoriesOrderController::class, 'index'])->name('menu');
         Route::post('/update/menu', [CategoriesOrderController::class, 'updateOrder'])->name('update.position');
     });

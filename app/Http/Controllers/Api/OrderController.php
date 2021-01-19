@@ -123,7 +123,7 @@ class OrderController extends Controller
             'deliveryTime' => $request->deliveryTime,
             'delivery_date' => $request->delivery_date,
             'quantity' => count(cart()->items()),
-            'status' => 'InReview'
+            'status' => 'Order-Received'
         ]);
         // Insert into order_product table
         foreach (cart()->items() as $item) {

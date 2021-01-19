@@ -39,6 +39,7 @@ class CreateOrdersTable extends Migration
             $table->string('deliveryTime')->nullable();
             $table->text('error')->nullable();
             $table->dateTime('delivery_date')->nullable();
+            $table->string('priority')->default(3);
             $table->timestamps();
         });
     }

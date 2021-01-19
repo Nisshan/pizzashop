@@ -31,5 +31,13 @@ class OrdersController extends Controller
         $order->update(['status' => $request->status]);
         Session::flash('success', 'Status changed');
         return back();
-   }
+    }
+
+    public function changePriority(Request $request)
+    {
+        $order = Order::findOrFail($request->order);
+        $order->update(['priority' => $request->priority]);
+        Session::flash('success', 'Status Priority');
+        return back();
+    }
 }

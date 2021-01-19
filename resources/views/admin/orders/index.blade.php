@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <select class="form-control" name="status" id="status">
                                 @foreach(config('deliverystatus.status') as $key => $status)
-                                    <option value="{{$key}}">{{$key}}</option>
+                                    <option value="{{$key}}">{{str_replace('-', ' ', $key)}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -48,6 +48,38 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="priorityModal" tabindex="-1" role="dialog" aria-labelledby="priorityModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="priorityModalLabel">Change Priority</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route('changePriority')}}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="text" hidden name="order" id="order">
+                        <div class="form-group">
+                            <select class="form-control" name="priority" id="priority">
+                                @foreach(config('deliverystatus.priority') as $key => $value)
+                                    <option value="{{$key}}">{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @push('scripts')
@@ -60,6 +92,11 @@
             $(document).on('click', '.change-status', function () {
                 $('#status').val($(this).data('status'));
                 $('#order_id').val($(this).data('id'));
+            });
+
+            $(document).on('click', '.change-priority', function () {
+                $('#priority').val($(this).data('status'));
+                $('#order').val($(this).data('id'));
             });
 
         });
