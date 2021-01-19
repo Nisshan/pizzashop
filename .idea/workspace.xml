@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2221aaab-bda4-44dd-bf2d-d9360ce6157f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/OrdersDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/OrdersDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/OrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/OrdersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/deliverystatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/deliverystatus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/OrderFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/OrderFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_20_160628_create_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_20_160628_create_orders_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/orders/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/sliders/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/sliders/view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/footer.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,6 +261,7 @@
       <workItem from="1610510534118" duration="36000" />
       <workItem from="1610979150647" duration="4240000" />
       <workItem from="1610984053838" duration="7607000" />
+      <workItem from="1611027174964" duration="299000" />
     </task>
     <servers />
   </component>

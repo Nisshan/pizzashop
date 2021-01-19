@@ -35,13 +35,13 @@
                             <td>Image</td>
                             <td>
 
-                                <img src="{{$product->path()}}">
+                                <img src="{{$slider->path()}}">
 
                             </td>
                         </tr>
                         <tr>
                             <td>Status</td>
-                            <td>{{$product->status == 1 ? 'Enabled' : 'Disabled'}}</td>
+                            <td>{{$slider->status == 1 ? 'Enabled' : 'Disabled'}}</td>
                         </tr>
                     </table>
                     <hr>

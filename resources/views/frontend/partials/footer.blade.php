@@ -1,13 +1,13 @@
 <footer class="mt-3">
   <div class="container border-top pt-4">
     <div class="row">
-      <div class="col-12 col-md-3">
-        <figure>
-          <a href="/">
-            <img class="img-fluid" src="{{asset("/images/logo.png")}}" alt="" />
-          </a>
-        </figure>
-      </div>
+{{--      <div class="col-12 col-md-3">--}}
+{{--        <figure>--}}
+{{--          <a href="/">--}}
+{{--            <img class="img-fluid" src="{{asset("/images/logo.png")}}" alt="" />--}}
+{{--          </a>--}}
+{{--        </figure>--}}
+{{--      </div>--}}
 
       <div class="col-12 col-md-3">
         {{--                <h4 class="fw-light text-center">QUICK LINKS</h4>--}}
