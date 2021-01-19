@@ -75,7 +75,7 @@
         @endforeach
         @else
         <div class="item banner-image position-relative">
-            <div class="item banner-image cover" style="background-image: url(./images/pizzaplace512.png);"></div>
+            <div class="item banner-image cover" style="background-image: url(./images/largeimage.png);"></div>
             @endif
 
         </div>
