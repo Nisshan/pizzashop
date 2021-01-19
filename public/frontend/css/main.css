@@ -467,15 +467,20 @@ label input[type="radio"]:checked ~ span {
 .banner-image {
     height: 600px;
 }
-.owl-carousel .owl-item img {
-    height: 600px;
-    object-fit: cover;
+
+.cover {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 992px) {
+    .banner-image {
+        height: 500px;
+    }
 }
 
 @media only screen and (max-width: 768px) {
-    .owl-carousel .owl-item img {
-        height: 400px;
-    }
     .banner-image {
         height: 400px;
     }
@@ -508,9 +513,6 @@ label input[type="radio"]:checked ~ span {
 
 @media only screen and (max-width: 600px) {
     .banner-image {
-        height: 300px;
-    }
-    .owl-carousel .owl-item img {
         height: 300px;
     }
 }
