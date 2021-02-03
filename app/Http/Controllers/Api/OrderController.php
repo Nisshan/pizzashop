@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\OrderResource;
 use App\Models\Delivery;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use Cartalyst\Stripe\Exception\CardErrorException;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -47,9 +47,24 @@ class OrderController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function viewAllOrderByStaff()
+    {
+        return response()->json([
+            'orders' => OrderResource::collection(Order::get())
+        ]);
+
+    }
+
+    public function viewSingleOrderByStaff(Order $order)
     {
 
+        return new OrderResource($order);
+
+    }
+
+    public function store(Request $request)
+    {
+//        return response()->json(['msg' => $request->all()]);
         cart()->setUser(auth()->id());
         cart()->refreshAllItemsData();
 
@@ -92,7 +107,6 @@ class OrderController extends Controller
 
     protected function addToOrdersTables($request, $error, $stripe)
     {
-
         cart()->setUser(auth()->id());
 
         $delivery_price = $this->calculateDeliveryCharge($request->delivery_type);
@@ -194,7 +208,12 @@ class OrderController extends Controller
     private function calculateDeliveryCharge($delivery_type)
     {
         if ($delivery_type !== 'self-pickup') {
-            return Delivery::where('slug', $delivery_type)->first()->price;
+            $price = Delivery::where('slug', $delivery_type)->first();
+            if ($price->chargeable == 1) {
+                return $price->price;
+            } else {
+                return 0;
+            }
         } else {
             return 0;
         }

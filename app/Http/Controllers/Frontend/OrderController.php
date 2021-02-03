@@ -136,7 +136,6 @@ class OrderController extends Controller
         return $order;
     }
 
-
     public function view(Order $order)
     {
         return view('frontend.pages.order', [
@@ -153,7 +152,6 @@ class OrderController extends Controller
         Mail::send(new OrderCanceled($order));
         return back()->with('success', 'Order Cancelled and the refund will be transferred to you');
     }
-
 
     private function calculateDeliveryCharge($delivery_type)
     {

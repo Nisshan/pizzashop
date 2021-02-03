@@ -114,10 +114,6 @@ class OrdersDatatable extends DataTable
                     ->orderable(true)
                     ->searchable(true),
                 'quantity',
-                Column::make('billing_name')
-                    ->title('Name')
-                    ->orderable(true)
-                    ->searchable(true),
                 'status',
                 'priority',
                 Column::computed('action')
