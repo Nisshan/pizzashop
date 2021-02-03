@@ -31,7 +31,7 @@ class ProductsDatatable extends DataTable
             })->editColumn('status', function ($query) {
                 return $query->status == true ? 'Active' : 'Inactive';
             })->editColumn('has_offer',function ($query){
-                return $query->has_offer =1 ? 'Yes' : 'No';
+                return $query->has_offer == 1 ? 'Yes' : 'No';
             });
     }
 
@@ -48,7 +48,7 @@ class ProductsDatatable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Blfrtip')
-            ->orderBy(3);
+            ->orderBy(4);
     }
 
     /**

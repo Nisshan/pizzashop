@@ -36,7 +36,7 @@
                         <span class="info-box-icon bg-warning "><i class="fas fa-users"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Total Staffs</span>
+                            <span class="info-box-text">Total Active Staffs</span>
                             <span class="info-box-number">{{$total_staffs}}</span>
                         </div>
                     </div>

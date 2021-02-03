@@ -10,13 +10,15 @@
                 <div class="col-sm-6 card-title">
                     <h3 class="m-0 text-dark">Coupon</h3>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('coupons.index')}}">Coupon</a>
-                        </li>
-                        <li class="breadcrumb-item">Create</li>
-                    </ol>
-                </div>
+                @if(auth()->user()->isAdmin())
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{route('coupons.index')}}">Coupon</a>
+                            </li>
+                            <li class="breadcrumb-item">Create</li>
+                        </ol>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="card-body">
@@ -54,9 +56,10 @@
                            id="percentage_reset" value="{{old('percent_off')}}">
                 </div>
 
-                <div class="form-group amount"  id="amount">
+                <div class="form-group amount" id="amount">
                     <label for="value">Value: <span class="required-form">*</span></label>
-                    <input type="number" min="1" class="form-control" name="value" id="value" value="{{old('value')}}" required>
+                    <input type="number" min="1" class="form-control" name="value" id="value" value="{{old('value')}}"
+                           required>
                 </div>
 
 

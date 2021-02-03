@@ -11,10 +11,6 @@ use Yajra\DataTables\Services\DataTable;
 
 class UsersDatatable extends DataTable
 {
-
-    public const SUPER_ADMIN = 1;
-    public const STAFF = 2;
-
     public function dataTable($query)
     {
         return datatables($query)

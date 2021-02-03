@@ -32,7 +32,7 @@ class UsersController extends Controller
             'role' => ['required']
         ]);
 
-        User::create([
+         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),

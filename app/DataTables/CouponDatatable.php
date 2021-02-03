@@ -24,13 +24,17 @@ class CouponDatatable extends DataTable
                 $view = view('shared.buttons.view')
                     ->with(['route' => route('coupons.show', ['coupon' => $query->id])])->render();
 
-                $edit = view('shared.buttons.edit')
-                    ->with(['route' => route('coupons.edit', ['coupon' => $query->id])])->render();
-                $view .= $edit;
 
-                $delete = view('shared.buttons.delete')
-                    ->with(['route' => route('coupons.destroy', ['coupon' => $query->id])])->render();
-                $view .= $delete;
+                if (auth()->user()->isAdmin()) {
+                    $edit = view('shared.buttons.edit')
+                        ->with(['route' => route('coupons.edit', ['coupon' => $query->id])])->render();
+                    $view .= $edit;
+
+                    $delete = view('shared.buttons.delete')
+                        ->with(['route' => route('coupons.destroy', ['coupon' => $query->id])])->render();
+                    $view .= $delete;
+                }
+
                 return $view;
             });
     }

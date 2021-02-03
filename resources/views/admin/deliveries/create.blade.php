@@ -10,13 +10,15 @@
                 <div class="col-sm-6 card-title">
                     <h3 class="m-0 text-dark">Category</h3>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('deliveries.index')}}">Deliveries Types</a>
-                        </li>
-                        <li class="breadcrumb-item">Create</li>
-                    </ol>
-                </div>
+                @if(auth()->user()->isAdmin())
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{route('deliveries.index')}}">Deliveries Types</a>
+                            </li>
+                            <li class="breadcrumb-item">Create</li>
+                        </ol>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="card-body">
@@ -48,9 +50,9 @@
                     </label> &nbsp;
                 </div>
 
-                <div class="form-group charge"  id="chargeable">
+                <div class="form-group charge" id="chargeable">
                     <label for="charge">Price : <span class="required-form">*</span></label>
-                    <input type="text"  class="form-control" name="price"
+                    <input type="text" class="form-control" name="price"
                            id="charge" value="{{old('price')}}" required>
                 </div>
                 <button type="submit" class="btn btn-success">Submit</button>

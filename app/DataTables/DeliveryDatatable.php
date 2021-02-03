@@ -18,14 +18,15 @@ class DeliveryDatatable extends DataTable
             ->addColumn('action', function ($query) {
                 $view = view('shared.buttons.view')
                     ->with(['route' => route('deliveries.show', ['delivery' => $query->id])])->render();
+                if (auth()->user()->isAdmin()) {
+                    $edit = view('shared.buttons.edit')
+                        ->with(['route' => route('deliveries.edit', ['delivery' => $query->id])])->render();
+                    $view .= $edit;
 
-                $edit = view('shared.buttons.edit')
-                    ->with(['route' => route('deliveries.edit', ['delivery' => $query->id])])->render();
-                $view .= $edit;
-
-                $delete = view('shared.buttons.delete')
-                    ->with(['route' => route('deliveries.destroy', ['delivery' => $query->id])])->render();
-                $view .= $delete;
+                    $delete = view('shared.buttons.delete')
+                        ->with(['route' => route('deliveries.destroy', ['delivery' => $query->id])])->render();
+                    $view .= $delete;
+                }
                 return $view;
             })->editColumn('chargeable', function ($query) {
                 return $query->chargeable == 1 ? 'Yes' : 'No';

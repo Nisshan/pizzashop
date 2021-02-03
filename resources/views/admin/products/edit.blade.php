@@ -94,12 +94,13 @@
                     </div>
                     <label>
                         <input type="radio" name="offer_type"
-                               value="1" class='offer_value' @if($product->offer_type == true) checked @endif
+                               value="1" class='offer_value'
+                               @if($product->has_offer == true && $product->offer_type == true) checked @endif
                         > &nbsp; Percentage
                     </label> &nbsp; &nbsp; &nbsp;
                     <label>
                         <input type="radio" name="offer_type" class='offer_value' value="0"
-                               @if($product->offer_type == false) checked @endif
+                               @if($product->has_offer == true && $product->offer_type == false) checked @endif
                         > &nbsp; Amount
                     </label> &nbsp;
                 </div>
@@ -136,7 +137,7 @@
                     </div>
                     <br>
                     @if($product->images->count())
-                        <div class="image-preview" >
+                        <div class="image-preview">
                             @foreach($product->images as $image)
                                 <img id="images"
                                      src="{{ $image->path ? $image->path() : "/images/admin/preview.jpg"}}"
@@ -245,7 +246,7 @@
         if ($('input[name="offer_type"]:checked').val() === '1') {
             $('#percentage').show();
         } else {
-            $('#amount').show();
+            $('#amount').hide()
         }
 
         $(document).ready(function () {

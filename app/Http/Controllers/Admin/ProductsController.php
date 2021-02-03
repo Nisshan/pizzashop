@@ -31,7 +31,7 @@ class ProductsController extends Controller
 
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-       
+
         $request->validate([
             'name' => ['required', 'min:5', 'max:256'],
             'description' => ['required', 'max:500'],
@@ -49,7 +49,7 @@ class ProductsController extends Controller
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
-            'cover' => isset($request->cover) ?? $this->uploadCoverImage($request->cover),
+            'cover' => isset($request->cover) ? $this->uploadCoverImage($request->cover) : '',
             'price' => $request->price,
             'amount_off' => $request->amount_off,
             'percent_off' => $request->percent_off,
