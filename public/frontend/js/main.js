@@ -27,9 +27,6 @@ $(".banner-carousel").owlCarousel({
     },
 });
 
-var image = document.getElementsByClassName("simple-parallax");
-new simpleParallax(image);
-
 var toastElList = [].slice.call(document.querySelectorAll(".toast"));
 var toastList = toastElList.map(function (toastEl) {
     return new bootstrap.Toast(toastEl);
