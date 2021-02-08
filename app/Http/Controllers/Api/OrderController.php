@@ -201,7 +201,7 @@ class OrderController extends Controller
             'subtotal' => cart()->getSubtotal(),
             'count' => count(cart()->items()),
             'discount' => $discount,
-            'payable' => $newSubTotal,
+            'payable' => "$newSubTotal",
         ]);
     }
 
