@@ -64,7 +64,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-//        return response()->json(['msg' => $request->all()]);
+//        return response()->json(['msg' => auth()->user()->coupon()->count()]);
         cart()->setUser(auth()->id());
         cart()->refreshAllItemsData();
 
@@ -72,7 +72,7 @@ class OrderController extends Controller
 
         $discount = 0;
         if (auth()->user()->coupon()->count()) {
-            $discount = auth()->user()->coupon()->discount;
+            $discount = auth()->user()->coupon()->first()->discount;
         }
         $newSubTotal = cart()->getSubtotal() - $discount;
 
@@ -113,7 +113,7 @@ class OrderController extends Controller
 
         $discount = 0;
         if (auth()->user()->coupon()->count()) {
-            $discount = auth()->user()->coupon()->discount;
+            $discount = auth()->user()->coupon()->first()->discount;
         }
         $newSubTotal = cart()->getSubtotal() - $discount;
         // Insert into orders table
@@ -175,11 +175,13 @@ class OrderController extends Controller
 
     public function getCartItems()
     {
+
         cart()->setUser(auth()->id());
 
         if (count(cart()->items()) < 1) {
             return response()->json(['message' => 'no items in the cart']);
         }
+
 
         $coupon = auth()->user()->coupon()->first();
         if (isset($coupon)) {
@@ -189,11 +191,11 @@ class OrderController extends Controller
             ]);
         }
 
-        cart()->refreshAllItemsData();
 
-        $discount = session()->get('coupon')['discount'] ?? 0;
+        $discount = isset($coupon) ? $coupon->discount : 0;
 
         $newSubTotal = cart()->getSubtotal() - $discount;
+
 
         return response()->json([
             'items' => cart()->items(),
