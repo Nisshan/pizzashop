@@ -26,7 +26,6 @@ class CartController extends Controller
         }
 
 
-        cart()->refreshAllItemsData();
 
         $discount = session()->get('coupon')['discount'] ?? 0;
 

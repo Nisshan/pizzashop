@@ -30,7 +30,6 @@ class OrderController extends Controller
             ]);
         }
 
-        cart()->refreshAllItemsData();
 
         $discount = session()->get('coupon')['discount'] ?? 0;
 
@@ -66,7 +65,7 @@ class OrderController extends Controller
     {
 //        return response()->json(['msg' => auth()->user()->coupon()->count()]);
         cart()->setUser(auth()->id());
-        cart()->refreshAllItemsData();
+        // cart()->refreshAllItemsData();
 
         $delivery_price = $this->calculateDeliveryCharge($request->delivery_type);
 
