@@ -46,6 +46,13 @@ class OrderController extends Controller
         ]);
     }
 
+    public function getAllDeliveryTypes()
+    {
+        return response()->json([
+            'delivery_types' => Delivery::where('status', 1)->get()
+        ]);
+    }
+
     public function viewAllOrderByStaff()
     {
         return response()->json([

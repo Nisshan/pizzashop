@@ -37,6 +37,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/cart/checkout', [OrderController::class, 'index']);
     Route::get('/orders/all',[OrderController::class,'viewAllOrderByStaff']);
     Route::get('/orders/{order}',[OrderController::class,'viewSingleOrderByStaff']);
+    Route::get('/delivery-types',[OrderController::class,'getAllDeliveryTypes']);
     Route::get('/cart/items', [OrderController::class, 'getCartItems']);
     Route::resource('users', UsersController::class)->except('create');
     Route::post('/cart', [CartController::class, 'addToCart']);
